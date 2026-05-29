@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Craig's Barbershop — Thornton NSW</title>
+<meta name="description" content="Precision cuts, fades and beard work in Thornton. 5.0 stars across 199 reviews. Book instantly on Fresha." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --white:#FFFFFF;
+  --ink:#111111;
+  --ink-2:#2b2b2b;
+  --muted:#6b6b69;
+  --line:#e7e7e3;
+  --surface:#F5F5F3;
+  --red:#C62B2B;
+  --blue:#1E6FE8;
+  --navy:#173043;
+  --r:14px;
+  --container:1240px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"DM Sans",system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--white);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{font-family:"Bebas Neue",sans-serif;font-weight:400;line-height:.92;letter-spacing:.01em;text-transform:uppercase}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.container{max-width:var(--container);margin:0 auto;padding:0 28px}
+.eyebrow{font-family:"DM Sans";font-weight:700;text-transform:uppercase;letter-spacing:.22em;font-size:12.5px;color:var(--red)}
+.eyebrow.blue{color:var(--blue)}
+
+/* ---- barber pole stripe motif ---- */
+.stripe-bar{
+  height:6px;width:100%;
+  background:repeating-linear-gradient(115deg,
+    var(--red) 0 14px,#fff 14px 22px,var(--blue) 22px 36px,#fff 36px 44px);
+  background-size:88px 100%;
+}
+.pole{
+  position:relative;overflow:hidden;border-radius:99px;
+  background:repeating-linear-gradient(115deg,
+    var(--red) 0 10px,#fff 10px 16px,var(--blue) 16px 26px,#fff 26px 32px);
+  background-size:62px 100%;
+  animation:poleMove 1.6s linear infinite;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);
+}
+@keyframes poleMove{to{background-position:62px 0}}
+@media (prefers-reduced-motion:reduce){.pole{animation:none}}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:52px;padding:0 26px;border-radius:99px;
+  font-weight:700;font-size:16px;letter-spacing:.01em;cursor:pointer;
+  border:1.5px solid transparent;transition:transform .18s var(--ease),background .18s,color .18s,box-shadow .18s;
+  white-space:nowrap;
+}
+.btn:active{transform:translateY(1px)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 10px 26px -10px rgba(198,43,43,.6)}
+.btn-red:hover{background:#a82323;box-shadow:0 16px 34px -12px rgba(198,43,43,.75)}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-ink:hover{background:#000}
+.btn-ghost{background:transparent;border-color:var(--ink);color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+.btn-ghost-light{background:transparent;border-color:rgba(255,255,255,.55);color:#fff}
+.btn-ghost-light:hover{background:#fff;color:var(--ink);border-color:#fff}
+.btn-white{background:#fff;color:var(--ink)}
+.btn-white:hover{background:#f0f0ec}
+
+/* ---------- NAV ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  background:rgba(255,255,255,.86);backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s;
+}
+.nav.scrolled{border-color:var(--line);box-shadow:0 6px 30px -22px rgba(0,0,0,.5)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+.nav-logo img{height:26px}
+.nav-links{display:flex;align-items:center;gap:34px}
+.nav-links a.lnk{font-weight:600;font-size:15px;color:var(--ink-2);position:relative;padding:4px 0}
+.nav-links a.lnk::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--red);transition:right .25s var(--ease)}
+.nav-links a.lnk:hover::after{right:0}
+.nav-cta{display:flex;align-items:center;gap:14px}
+.nav-phone{font-weight:600;font-size:15px;color:var(--ink);display:flex;align-items:center;gap:8px}
+.nav .btn{min-height:46px;padding:0 22px;font-size:15px}
+.burger{display:none;background:none;border:0;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.burger span{width:24px;height:2px;background:var(--ink);display:block;transition:.25s}
+
+/* ---------- HERO shared ---------- */
+.hero{position:relative;display:none}
+.hero.active{display:block}
+.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.star-badge{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
+.stars{display:inline-flex;gap:3px}
+.stars svg{width:17px;height:17px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+
+/* Hero A — full bleed, centered */
+#heroA{height:100svh;min-height:660px;color:#fff}
+#heroA .scrim{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 42%,rgba(8,12,16,.42) 0%,rgba(8,12,16,.6) 60%,rgba(8,12,16,.78) 100%),linear-gradient(180deg,rgba(8,12,16,.5) 0%,rgba(8,12,16,.2) 34%,rgba(8,12,16,.45) 72%,rgba(8,12,16,.9) 100%)}
+#heroA .container{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:74px 28px 132px}
+#heroA .eyebrow{color:#fff;opacity:.9;margin-bottom:22px}
+#heroA .hl{font-size:clamp(62px,10.5vw,164px);max-width:15ch;text-shadow:0 2px 40px rgba(0,0,0,.45)}
+#heroA .hl .red{color:#ff5a5a}
+#heroA .sub{max-width:50ch;font-size:19px;color:rgba(255,255,255,.9);margin:24px auto 0;text-shadow:0 1px 20px rgba(0,0,0,.5)}
+#heroA .hero-cta{justify-content:center}
+/* hero A bottom stats bar */
+#heroA .hero-stats{position:absolute;left:0;right:0;bottom:60px;z-index:3;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;padding:22px 20px;background:linear-gradient(0deg,rgba(8,12,16,.72),rgba(8,12,16,0))}
+#heroA .hero-stats .st{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2px 38px;position:relative}
+#heroA .hero-stats .st + .st::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);height:34px;width:1px;background:rgba(255,255,255,.22)}
+#heroA .hero-stats .num{font-family:"Bebas Neue";font-size:38px;line-height:.85;color:#fff;display:flex;align-items:center;gap:7px}
+#heroA .hero-stats .num .stars{display:inline-flex;gap:2px}
+#heroA .hero-stats .num .stars svg{width:15px;height:15px}
+#heroA .hero-stats .lbl{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:700;margin-top:7px}
+@media (max-width:560px){#heroA .hero-stats{gap:0}#heroA .hero-stats .st{padding:2px 18px}#heroA .hero-stats .num{font-size:30px}#heroA .hero-stats .lbl{font-size:9.5px;letter-spacing:.1em}}
+
+/* Hero entrance + image reveal animations */
+@keyframes heroUp{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes statUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+#heroA .container > *{opacity:0;animation:heroUp 1s var(--ease) forwards}
+#heroA .eyebrow{animation-delay:.15s}
+#heroA .hl{animation-delay:.3s}
+#heroA .sub{animation-delay:.52s}
+#heroA .hero-cta{animation-delay:.68s}
+#heroA .hero-stats{opacity:0;animation:statUp .9s var(--ease) .82s forwards}
+@media (prefers-reduced-motion:reduce){
+  #heroA .container > *,#heroA .hero-stats{opacity:1;animation:none}
+}
+
+/* ---------- TRUST STRIP ---------- */
+.trust{background:var(--ink);color:#fff}
+.trust-inner{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
+.trust .item{display:flex;align-items:center;gap:10px;padding:18px 26px;font-weight:600;font-size:15px}
+.trust .item svg{width:18px;height:18px;flex:none}
+.trust .sep{width:1px;height:20px;background:rgba(255,255,255,.18)}
+.trust .gold{color:#ffce4d}
+
+/* ---------- SECTION SCAFFOLD ---------- */
+section{position:relative}
+.sec{padding:108px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:54px;flex-wrap:wrap}
+.sec-title{font-size:clamp(44px,6vw,86px)}
+.sec-head p{max-width:40ch;color:var(--muted)}
+.tagmark{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.tagmark .pole{width:38px;height:8px}
+
+/* ---------- SERVICES ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.svc{
+  background:var(--white);border:1px solid var(--line);border-radius:var(--r);
+  padding:30px 28px 26px;display:flex;flex-direction:column;position:relative;overflow:hidden;
+  transition:transform .25s var(--ease),box-shadow .25s,border-color .25s;
+}
+.svc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:repeating-linear-gradient(180deg,var(--red) 0 10px,#fff 10px 14px,var(--blue) 14px 24px,#fff 24px 28px);transform:translateX(-4px);transition:transform .25s var(--ease)}
+.svc:hover{transform:translateY(-5px);box-shadow:0 24px 50px -28px rgba(0,0,0,.4);border-color:transparent}
+.svc:hover::before{transform:translateX(0)}
+.svc .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.svc h3{font-size:30px}
+.svc .price{font-family:"Bebas Neue";font-size:30px;color:var(--ink);white-space:nowrap}
+.svc .dur{font-size:12.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);font-weight:700;margin-top:6px}
+.svc p{color:var(--muted);font-size:15.5px;margin-top:14px;flex:1}
+.svc .book{margin-top:20px;display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--ink);font-size:15px;transition:gap .2s}
+.svc .book svg{width:16px;height:16px;transition:transform .2s}
+.svc:hover .book{color:var(--red)}
+.svc:hover .book svg{transform:translateX(4px)}
+.svc.ladies .dur{color:var(--red)}
+.svc-note{margin-top:26px;color:var(--muted);font-size:14px;display:flex;align-items:center;gap:10px}
+
+/* ---------- HOURS ---------- */
+.hours{background:var(--surface)}
+.hours-wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+.hours-list{display:flex;flex-direction:column}
+.hrow{display:flex;align-items:center;justify-content:space-between;padding:20px 4px;border-bottom:1px solid var(--line);font-size:18px}
+.hrow:first-child{border-top:1px solid var(--line)}
+.hrow .day{font-weight:600}
+.hrow .time{font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.hrow.closed .time{color:var(--muted)}
+.hrow.feat .badge{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--blue);padding:4px 10px;border-radius:99px;margin-left:12px}
+.hrow.today{background:#fff;margin:0 -16px;padding:20px;border-radius:10px;border-bottom:1px solid transparent;box-shadow:0 16px 40px -26px rgba(0,0,0,.45);position:relative;font-weight:700}
+.hrow.today .day{color:var(--red)}
+.hours-aside{background:var(--ink);color:#fff;border-radius:var(--r);padding:42px 38px;position:relative;overflow:hidden}
+.hours-aside .stripe-bar{position:absolute;top:0;left:0}
+.hours-aside h3{font-size:40px;margin-bottom:10px}
+.hours-aside p{color:rgba(255,255,255,.7);margin-bottom:26px}
+.hours-aside .open-now{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:8px 14px;border-radius:99px;margin-bottom:26px}
+.dot{width:9px;height:9px;border-radius:50%;background:#3ad07a;box-shadow:0 0 0 4px rgba(58,208,122,.25)}
+.dot.off{background:#ff6a6a;box-shadow:0 0 0 4px rgba(255,106,106,.22)}
+@keyframes dotPulse{0%,100%{box-shadow:0 0 0 4px rgba(58,208,122,.3)}50%{box-shadow:0 0 0 8px rgba(58,208,122,.08)}}
+.dot:not(.off){animation:dotPulse 1.4s ease-in-out infinite}
+
+/* ---------- ABOUT ---------- */
+.about-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:64px;align-items:center}
+.about-media{position:relative}
+.about-media .frame{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/5}
+.about-media .frame img{width:100%;height:100%;object-fit:cover}
+.about-media .badge{position:absolute;right:-22px;bottom:34px;background:#fff;border-radius:14px;padding:20px 24px;box-shadow:0 26px 60px -26px rgba(0,0,0,.5);text-align:center;z-index:3}
+.about-media .badge .num{font-family:"Bebas Neue";font-size:58px;line-height:.8;color:var(--ink)}
+.about-media .badge .stars{justify-content:center;margin:6px 0}
+.about-media .badge .lbl{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.about-copy h2{font-size:clamp(40px,5vw,72px);margin-bottom:8px}
+.about-copy .lead{font-size:21px;color:var(--ink-2);margin:22px 0 18px;line-height:1.5}
+.about-copy p{color:var(--muted);margin-bottom:16px}
+.feat-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.feat-row .tag{display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:9px 16px;font-weight:600;font-size:14px}
+.feat-row .tag svg{width:16px;height:16px;color:var(--blue)}
+
+/* ---------- GALLERY ---------- */
+.gallery{background:var(--surface)}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px}
+.gal-item{position:relative;overflow:hidden;border-radius:12px;cursor:pointer;background:#ddd}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.gal-item::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,12,16,.4),transparent 55%);opacity:0;transition:opacity .3s}
+.gal-item:hover img{transform:scale(1.07)}
+.gal-item:hover::after{opacity:1}
+.gal-item .plus{position:absolute;right:14px;bottom:12px;color:#fff;font-family:"Bebas Neue";font-size:26px;opacity:0;transform:translateY(6px);transition:.3s;z-index:2}
+.gal-item:hover .plus{opacity:1;transform:none}
+.gal-item.tall{grid-row:span 2}
+.gal-item.wide{grid-column:span 2}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;z-index:120;background:rgba(8,10,12,.94);display:none;align-items:center;justify-content:center;padding:30px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:92vw;max-height:84vh;border-radius:8px;box-shadow:0 30px 80px -20px #000}
+.lb-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;width:54px;height:54px;border-radius:50%;cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;transition:.2s}
+.lb-btn:hover{background:#fff;color:var(--ink)}
+.lb-prev{left:24px}.lb-next{right:24px}
+.lb-close{position:absolute;top:24px;right:24px;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;font-size:20px}
+.lb-count{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-weight:600;letter-spacing:.1em;font-size:13px}
+
+/* ---------- BIG CTA ---------- */
+.cta{background:var(--red);color:#fff;text-align:center;position:relative;overflow:hidden}
+.cta .stripe-bar{position:absolute;top:0;left:0;opacity:.85;filter:saturate(1.2)}
+.cta .stripe-bar.bot{top:auto;bottom:0}
+.cta-inner{padding:118px 0;position:relative;z-index:2}
+.cta h2{font-size:clamp(52px,8vw,128px);margin-bottom:6px}
+.cta p{font-size:20px;color:rgba(255,255,255,.92);max-width:46ch;margin:18px auto 36px}
+.cta .btn-white{min-height:60px;padding:0 38px;font-size:18px}
+.cta .micro{margin-top:20px;font-size:14px;color:rgba(255,255,255,.8)}
+
+/* ---------- FIND US ---------- */
+.find-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:stretch}
+.find-info{display:flex;flex-direction:column;gap:8px}
+.info-block{padding:24px 0;border-bottom:1px solid var(--line)}
+.info-block:first-of-type{border-top:1px solid var(--line)}
+.info-block .k{font-size:12.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);font-weight:700;margin-bottom:8px}
+.info-block .v{font-size:20px;font-weight:600;color:var(--ink)}
+.info-block a.v{transition:color .2s}
+.info-block a.v:hover{color:var(--red)}
+.info-block .phone{font-family:"Bebas Neue";font-size:46px;letter-spacing:.02em}
+.map-wrap{border-radius:var(--r);overflow:hidden;min-height:440px;border:1px solid var(--line);position:relative}
+.map-wrap iframe{width:100%;height:100%;border:0;min-height:440px;filter:grayscale(.25) contrast(1.02)}
+.acc-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.acc-tags .tag{font-size:13px;font-weight:600;background:var(--surface);border:1px solid var(--line);padding:7px 13px;border-radius:99px}
+
+/* ---------- FOOTER ---------- */
+.footer{background:var(--ink);color:#fff}
+.footer .stripe-bar{opacity:.9}
+.foot-inner{padding:74px 0 30px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px}
+.footer .flogo img{height:30px;margin-bottom:20px}
+.footer p,.footer a{color:rgba(255,255,255,.72);font-size:15px;line-height:1.7}
+.footer a:hover{color:#fff}
+.fcol h4{font-family:"DM Sans";font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#fff;margin-bottom:16px}
+.fcol .row{display:flex;flex-direction:column;gap:9px}
+.social{display:flex;gap:12px;margin-top:18px}
+.social a{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;transition:.2s}
+.social a:hover{background:#fff;color:var(--ink);border-color:#fff}
+.social svg{width:18px;height:18px}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.12);padding:22px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13.5px;color:rgba(255,255,255,.55)}
+
+/* ---------- mobile sticky book bar ---------- */
+.mobile-book{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line);box-shadow:0 -10px 30px -20px rgba(0,0,0,.4)}
+.mobile-book .btn{width:100%;min-height:54px}
+
+/* ---------- reveal anim ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* ---------- responsive ---------- */
+@media (max-width:1080px){
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .gal-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:880px){
+  body{font-size:17px}
+  .nav-links,.nav-phone{display:none}
+  .burger{display:flex}
+  .nav.open .nav-links{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;gap:0;background:#fff;border-bottom:1px solid var(--line);padding:8px 0}
+  .nav.open .nav-links a.lnk{padding:16px 28px;width:100%;font-size:17px}
+  .hours-wrap,.about-grid,.find-grid{grid-template-columns:1fr;gap:40px}
+  .about-media .badge{right:18px;bottom:18px}
+  .sec{padding:74px 0}
+  .map-wrap{order:2}
+  .footer .foot-inner{grid-template-columns:1fr;gap:34px}
+  .mobile-book{display:block}
+  body{padding-bottom:0}
+}
+@media (max-width:560px){
+  .svc-grid{grid-template-columns:1fr}
+  .gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
+  .container{padding:0 20px}
+  .trust .sep{display:none}
+  .trust .item{padding:12px 16px;font-size:14px}
+  #heroA .hl{font-size:clamp(52px,15vw,92px)}
+}
+</style>
+</head>
+<body data-hero="a">
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="nav-logo" aria-label="Craig's Barbershop home"><img src="assets/logo-dark.png" alt="Craig's Barbershop" /></a>
+    <nav class="nav-links" id="navLinks">
+      <a class="lnk" href="#services">Services</a>
+      <a class="lnk" href="#hours">Hours</a>
+      <a class="lnk" href="#about">About</a>
+      <a class="lnk" href="#gallery">Gallery</a>
+      <a class="lnk" href="#find">Find Us</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="nav-phone" href="tel:0414723303">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+        0414 723 303
+      </a>
+      <a class="btn btn-red" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et" target="_blank" rel="noopener">Book Now</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<span id="top"></span>
+
+<!-- ============ HERO A : full bleed ============ -->
+<section class="hero active" id="heroA" data-variant="a">
+  <img class="hero-photo" src="assets/photo-clipper.jpg" alt="Barber giving a precision clipper cut at Craig's Barbershop Thornton" loading="eager" />
+  <div class="scrim"></div>
+  <div class="container">
+    <span class="eyebrow">Barbershop · Thornton Shopping Centre</span>
+    <h1 class="hl">Precision cuts.<br /><span class="red">Thornton's</span> own.</h1>
+    <p class="sub">A modern barbershop in the heart of Thornton — sharp fades, classic cuts and expert beard work for every age. Walk in a regular, walk out fresh.</p>
+    <div class="hero-cta">
+      <a class="btn btn-red" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et" target="_blank" rel="noopener">Book Now on Fresha</a>
+      <a class="btn btn-ghost-light" href="#services">See Services</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="st"><span class="num"><span class="stars" data-stars-light></span>5.0</span><span class="lbl">Fresha Rating</span></div>
+    <div class="st"><span class="num" data-count="199">199</span><span class="lbl">5-Star Reviews</span></div>
+    <div class="st"><span class="num" data-count="10" data-suffix="+">10+</span><span class="lbl">Years Local</span></div>
+    <div class="st"><span class="num">Free</span><span class="lbl">Parking Onsite</span></div>
+  </div>
+</section>
+
+
+<!-- ============ SERVICES ============ -->
+<section class="sec" id="services">
+  <div class="container">
+    <div class="sec-head">
+      <div class="reveal">
+        <div class="tagmark"><span class="pole"></span><span class="eyebrow">The Menu</span></div>
+        <h2 class="sec-title">Services &amp; pricing</h2>
+      </div>
+      <p class="reveal d1">Traditional cuts, modern styles and clean beard work — for blokes, kids and ladies alike. Tap any service to book your time on Fresha.</p>
+    </div>
+    <div class="svc-grid" id="svcGrid"></div>
+    <p class="svc-note reveal"><span class="pole" style="width:30px;height:7px"></span> Prices shown are starting rates and may vary with length and style. Full menu &amp; live availability on Fresha.</p>
+  </div>
+</section>
+
+<!-- ============ HOURS ============ -->
+<section class="sec hours" id="hours">
+  <div class="container hours-wrap">
+    <div class="reveal">
+      <div class="tagmark"><span class="pole"></span><span class="eyebrow blue">Opening Hours</span></div>
+      <h2 class="sec-title" style="margin-bottom:30px">When we're open</h2>
+      <div class="hours-list" id="hoursList"></div>
+    </div>
+    <aside class="hours-aside reveal d1">
+      <div class="stripe-bar"></div>
+      <h3>Late nights<br />on Thursday</h3>
+      <p>Open until 7:00 PM every Thursday — the easy after-work fresh-up.</p>
+      <div class="open-now" id="openNow"><span class="dot"></span><span id="openTxt">Checking hours…</span></div>
+      <div><a class="btn btn-white" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et" target="_blank" rel="noopener">Book a Time</a></div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="sec" id="about">
+  <div class="container about-grid">
+    <div class="about-media reveal">
+      <div class="frame"><img src="assets/photo-styling.jpg" alt="A barber styling a client at Craig's Barbershop" /></div>
+      <div class="badge">
+        <div class="num">5.0</div>
+        <div class="stars gold" data-stars style="justify-content:center"></div>
+        <div class="lbl">199 Reviews</div>
+      </div>
+    </div>
+    <div class="about-copy reveal d1">
+      <div class="tagmark"><span class="pole"></span><span class="eyebrow">About the Shop</span></div>
+      <h2>Grooming, done<br />properly.</h2>
+      <p class="lead">At Craig's Barbershop, grooming transcends the ordinary. With a focus on precision haircuts and expertly styled beards, every visit promises a refined experience tailored to your style.</p>
+      <p>Convenient parking ensures that stepping into this welcoming space is as hassle-free as the service is exceptional. We've looked after Thornton for over a decade — family-friendly, fully accessible, and now under new ownership carrying the same standard forward.</p>
+      <div class="feat-row">
+        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Family friendly</span>
+        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Wheelchair accessible</span>
+        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> EFTPOS available</span>
+        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Free parking</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="sec gallery" id="gallery">
+  <div class="container">
+    <div class="sec-head">
+      <div class="reveal">
+        <div class="tagmark"><span class="pole"></span><span class="eyebrow">Inside the Shop</span></div>
+        <h2 class="sec-title">The gallery</h2>
+      </div>
+      <p class="reveal d1">A look at the chairs, the team and the work. Tap any photo to view it full size.</p>
+    </div>
+    <div class="gal-grid reveal" id="galGrid"></div>
+  </div>
+</section>
+
+<!-- ============ BIG CTA ============ -->
+<section class="cta">
+  <div class="stripe-bar"></div>
+  <div class="container cta-inner">
+    <h2>Ready for a fresh cut?</h2>
+    <p>Pick your barber, choose your time and lock it in — instant confirmation, pay by app, no phone tag.</p>
+    <a class="btn btn-white" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et" target="_blank" rel="noopener">Book on Fresha</a>
+    <div class="micro">Or call <a href="tel:0414723303" style="color:#fff;text-decoration:underline">0414 723 303</a></div>
+  </div>
+  <div class="stripe-bar bot"></div>
+</section>
+
+<!-- ============ FIND US ============ -->
+<section class="sec" id="find">
+  <div class="container">
+    <div class="sec-head">
+      <div class="reveal">
+        <div class="tagmark"><span class="pole"></span><span class="eyebrow blue">Find Us</span></div>
+        <h2 class="sec-title">Come say hello</h2>
+      </div>
+      <p class="reveal d1">Inside Thornton Shopping Centre, on the corner of Taylor Ave &amp; Thomas Coke Drive. Plenty of free parking out front.</p>
+    </div>
+    <div class="find-grid">
+      <div class="find-info reveal">
+        <div class="info-block">
+          <div class="k">Address</div>
+          <a class="v" href="https://www.google.com/maps/search/?api=1&query=1A+Taylor+Avenue,+Thornton+NSW+2322" target="_blank" rel="noopener">Shop 3D, 1A Taylor Avenue,<br />Thornton NSW 2322</a>
+        </div>
+        <div class="info-block">
+          <div class="k">Call us</div>
+          <a class="v phone" href="tel:0414723303">0414 723 303</a>
+        </div>
+        <div class="info-block">
+          <div class="k">Email</div>
+          <a class="v" href="mailto:craigsbarbershopthornton@gmail.com">craigsbarbershopthornton@gmail.com</a>
+        </div>
+        <div class="info-block">
+          <div class="k">Hours</div>
+          <div class="v" style="font-weight:500;font-size:17px;line-height:1.7">Mon–Wed 9–5:30 · Thu 9–7 · Fri 9–5:30<br />Sat 9–1 · Sun closed</div>
+        </div>
+        <div class="info-block" style="border-bottom:0">
+          <div class="k">Good to know</div>
+          <div class="acc-tags">
+            <span class="tag">♿ Step-free access</span>
+            <span class="tag">Free parking</span>
+            <span class="tag">Kid-friendly</span>
+            <span class="tag">EFTPOS</span>
+          </div>
+        </div>
+        <a class="btn btn-ink" style="margin-top:18px;align-self:flex-start" href="https://maps.google.com/?daddr=1A+Taylor+Avenue,+Thornton+NSW+2322" target="_blank" rel="noopener">Get Directions</a>
+      </div>
+      <div class="map-wrap reveal d1">
+        <iframe title="Map to Craig's Barbershop Thornton" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=1A+Taylor+Avenue,+Thornton+NSW+2322,+Australia&output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="stripe-bar"></div>
+  <div class="container foot-inner">
+    <div>
+      <div class="flogo"><img src="assets/logo-white.png" alt="Craig's Barbershop" /></div>
+      <p>A modern barbershop in Thornton Shopping Centre. Precision cuts, fades and beard work for every age — booked the easy way.</p>
+      <div class="social">
+        <a href="https://facebook.com/craigsatthornton" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1Z"/></svg></a>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>Visit</h4>
+      <div class="row">
+        <a href="https://www.google.com/maps/search/?api=1&query=1A+Taylor+Avenue,+Thornton+NSW+2322" target="_blank" rel="noopener">Shop 3D, 1A Taylor Avenue,<br />Thornton NSW 2322</a>
+        <a href="tel:0414723303">0414 723 303</a>
+        <a href="mailto:craigsbarbershopthornton@gmail.com">craigsbarbershopthornton@gmail.com</a>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>Hours</h4>
+      <div class="row">
+        <span>Mon–Wed&nbsp;&nbsp;9:00 – 5:30</span>
+        <span>Thursday&nbsp;&nbsp;9:00 – 7:00</span>
+        <span>Friday&nbsp;&nbsp;9:00 – 5:30</span>
+        <span>Saturday&nbsp;&nbsp;9:00 – 1:00</span>
+        <span>Sunday&nbsp;&nbsp;Closed</span>
+      </div>
+      <a class="btn btn-red" style="margin-top:20px" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et" target="_blank" rel="noopener">Book on Fresha</a>
+    </div>
+  </div>
+  <div class="container foot-bottom">
+    <span>© <span id="yr"></span> Craig's Barbershop, Thornton. All rights reserved.</span>
+    <span>Bookings powered by Fresha · 5.0 ★ (199 reviews)</span>
+  </div>
+</footer>
+
+<!-- mobile sticky book -->
+<div class="mobile-book">
+  <a class="btn btn-red" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et" target="_blank" rel="noopener">Book Now on Fresha — 5.0 ★</a>
+</div>
+
+<!-- lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" aria-label="Close">✕</button>
+  <button class="lb-btn lb-prev" aria-label="Previous">‹</button>
+  <img id="lbImg" alt="" />
+  <button class="lb-btn lb-next" aria-label="Next">›</button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
+<script>
+const FRESHA="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et";
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* star svg fill */
+const starSVG='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.4L12 17.8 6.2 20.7l1.1-6.4L2.6 9.3l6.5-.9L12 2.5z"/></svg>';
+document.querySelectorAll('[data-stars]').forEach(el=>{el.style.color=el.classList.contains('gold')?'#ffce4d':'var(--red)';el.innerHTML=starSVG.repeat(5);});
+document.querySelectorAll('[data-stars-light]').forEach(el=>{el.style.color='#ffce4d';el.innerHTML=starSVG.repeat(5);});
+
+/* services */
+const services=[
+  {n:"Buzz Cut",dur:"15 min",price:"A$28",d:"A clean, even all-over clipper cut. In, out, sharp."},
+  {n:"Short Back & Sides",dur:"30 min",price:"A$38",d:"The timeless tidy-up — scissor top, tapered sides."},
+  {n:"Scissor Cut",dur:"40 min",price:"from A$42",d:"Tailored scissor work for length, shape and texture."},
+  {n:"Skin & Taper Fade",dur:"45 min",price:"from A$45",d:"A seamless gradient, blended by hand to your liking."},
+  {n:"Beard Trim & Shaping",dur:"5–15 min",price:"from A$5",d:"Lined up, shaped and cleaned to suit your jaw."},
+  {n:"Kids Haircut",dur:"30 min",price:"from A$26",d:"Patient, friendly cuts for the little ones."},
+  {n:"Hair & Styling — Ladies",dur:"15 min",price:"A$28",d:"Quick styling and finish for a fresh look.",ladies:true},
+  {n:"Hair & Styling — Ladies",dur:"30 min",price:"A$38",d:"Wash, cut and style — the full sit-down treatment.",ladies:true},
+];
+document.getElementById('svcGrid').innerHTML=services.map((s,i)=>`
+  <a class="svc reveal ${s.ladies?'ladies':''} d${(i%3)+1}" href="${FRESHA}" target="_blank" rel="noopener">
+    <div class="top"><h3>${s.n}</h3><span class="price">${s.price}</span></div>
+    <div class="dur">${s.dur}</div>
+    <p>${s.d}</p>
+    <span class="book">Book this <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+  </a>`).join('');
+
+/* hours */
+const hours=[
+  {d:"Monday",t:"9:00 AM – 5:30 PM"},
+  {d:"Tuesday",t:"9:00 AM – 5:30 PM"},
+  {d:"Wednesday",t:"9:00 AM – 5:30 PM"},
+  {d:"Thursday",t:"9:00 AM – 7:00 PM",feat:true},
+  {d:"Friday",t:"9:00 AM – 5:30 PM"},
+  {d:"Saturday",t:"9:00 AM – 1:00 PM"},
+  {d:"Sunday",t:"Closed",closed:true},
+];
+const todayIdx=(new Date().getDay()+6)%7;
+document.getElementById('hoursList').innerHTML=hours.map((h,i)=>`
+  <div class="hrow ${h.feat?'feat':''} ${h.closed?'closed':''} ${i===todayIdx?'today':''}">
+    <span class="day">${h.d}${h.feat?'<span class="badge">Late night</span>':''}</span>
+    <span class="time">${h.t}</span>
+  </div>`).join('');
+
+/* open-now indicator */
+(function(){
+  const ranges={0:null,1:[9,17.5],2:[9,17.5],3:[9,19],4:[9,17.5],5:[9,17.5],6:[9,13]};
+  const now=new Date();const day=now.getDay();const h=now.getHours()+now.getMinutes()/60;
+  const r=ranges[day];const open=r&&h>=r[0]&&h<r[1];
+  const txt=document.getElementById('openTxt');const dot=document.querySelector('#openNow .dot');
+  if(open){txt.textContent="Open now — come on in";}
+  else{txt.textContent="Closed right now — book ahead";dot.classList.add('off');}
+})();
+
+/* gallery */
+const gal=[
+  {src:"assets/photo-wide.jpg",cls:"wide",a:"The team at work inside Craig's Barbershop"},
+  {src:"assets/photo-clipper.jpg",cls:"tall",a:"Precision clipper work"},
+  {src:"assets/photo-mirror.jpg",cls:"",a:"The mirror reveal"},
+  {src:"assets/photo-beard.jpg",cls:"",a:"Beard shaping detail"},
+  {src:"assets/photo-styling.jpg",cls:"wide",a:"Styling a client"},
+  {src:"assets/photo-chairs.jpg",cls:"",a:"The barber chairs"},
+];
+const galSpeed=[0.03,-0.045,0.05,-0.03,0.04,-0.05];
+document.getElementById('galGrid').innerHTML=gal.map((g,i)=>`
+  <div class="gal-item ${g.cls} reveal" style="transition-delay:${(i%3)*0.09}s" data-i="${i}" data-speed="${galSpeed[i%galSpeed.length]}"><img src="${g.src}" alt="${g.a}" loading="lazy"/><span class="plus">＋</span></div>`).join('');
+
+/* lightbox */
+const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbCount=document.getElementById('lbCount');
+let cur=0;
+function openLb(i){cur=(i+gal.length)%gal.length;lbImg.src=gal[cur].src;lbImg.alt=gal[cur].a;lbCount.textContent=(cur+1)+' / '+gal.length;lb.classList.add('open');}
+document.getElementById('galGrid').addEventListener('click',e=>{const it=e.target.closest('.gal-item');if(it)openLb(+it.dataset.i);});
+lb.querySelector('.lb-next').addEventListener('click',e=>{e.stopPropagation();openLb(cur+1);});
+lb.querySelector('.lb-prev').addEventListener('click',e=>{e.stopPropagation();openLb(cur-1);});
+lb.querySelector('.lb-close').addEventListener('click',()=>lb.classList.remove('open'));
+lb.addEventListener('click',e=>{if(e.target===lb)lb.classList.remove('open');});
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')lb.classList.remove('open');if(e.key==='ArrowRight')openLb(cur+1);if(e.key==='ArrowLeft')openLb(cur-1);});
+
+/* nav scrolled + burger */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>20);},{passive:true});
+document.getElementById('burger').addEventListener('click',()=>nav.classList.toggle('open'));
+document.getElementById('navLinks').addEventListener('click',e=>{if(e.target.classList.contains('lnk'))nav.classList.remove('open');});
+
+/* reveal on scroll */
+const io=new IntersectionObserver((ents)=>{ents.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:"0px 0px -8% 0px"});
+document.querySelectorAll('.reveal').forEach(el=>{if(!el.classList.contains('in'))io.observe(el);});
+
+/* count-up stats on load */
+function countUp(el){
+  const t=+el.dataset.count,suf=el.dataset.suffix||'',dur=1300,s=performance.now();
+  function tick(n){const p=Math.min((n-s)/dur,1);const e=1-Math.pow(1-p,3);el.textContent=Math.round(t*e)+suf;if(p<1)requestAnimationFrame(tick);}
+  requestAnimationFrame(tick);
+}
+
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+if(!reduce){setTimeout(()=>document.querySelectorAll('#heroA .hero-stats [data-count]').forEach(countUp),950);}
+</script>
+</body>
+</html>
