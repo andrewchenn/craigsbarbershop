@@ -132,7 +132,7 @@ img{display:block;max-width:100%}
 
 /* Hero entrance + image reveal animations */
 @keyframes heroUp{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
-@keyframes statUp{from{opacity:0;transform:translateY(80px)}to{opacity:1;transform:none}}
+@keyframes statUp{from{opacity:0;transform:translateY(160px)}to{opacity:1;transform:none}}
 #heroA .container > *{opacity:0;animation:heroUp 1s var(--ease) forwards}
 #heroA .eyebrow{animation-delay:.15s}
 #heroA .hl{animation-delay:.3s}
@@ -364,6 +364,8 @@ section{position:relative}
   .mob-drawer-foot{display:flex;flex-direction:column;gap:12px;padding-top:18px;flex-shrink:0}
   .mob-drawer-call{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:600;color:rgba(255,255,255,.78);font-size:15px;text-decoration:none}
   .mob-drawer-call svg{width:16px;height:16px}
+  /* hide eyebrow on mobile */
+  #heroA .eyebrow{display:none}
   /* hero left-align */
   #heroA .container{align-items:flex-start;text-align:left}
   #heroA .hero-cta{justify-content:flex-start}
@@ -387,15 +389,18 @@ section{position:relative}
   /* sticky bar layout */
   .mb-row{display:flex;gap:10px;align-items:center}
   .mb-call{
-    flex:none;width:52px;height:52px;border-radius:99px;
+    flex:none;width:46px;height:46px;border-radius:99px;
     border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;color:var(--ink);
   }
-  .mb-call svg{width:20px;height:20px}
-  .mb-btn{flex:1;min-height:52px}
-  .mb-status{justify-content:center}
+  .mb-call svg{width:19px;height:19px}
+  .mb-btn{flex:1;min-height:46px;flex-direction:column;gap:1px;padding:0 20px}
+  .mb-open-label{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:600;opacity:.88;letter-spacing:.05em}
+  .mb-open-label .dot{width:6px;height:6px;flex:none;box-shadow:none}
+  .mb-btn-text{font-size:15px;font-weight:700}
   /* mobile sticky bar — hidden until scroll */
   .mobile-book{
     display:block;
+    padding:8px 14px calc(8px + env(safe-area-inset-bottom));
     transform:translateY(110%);
     transition:transform .38s var(--ease);
   }
@@ -414,25 +419,25 @@ section{position:relative}
   .foot-bottom{border-top:none;padding:0 0 24px;font-size:15px}
   .svc-hidden{display:none}
   .svc-more{display:flex;width:100%;margin-top:6px}
-  body.mb-active{padding-bottom:90px}
+  body.mb-active{padding-bottom:74px}
 }
 
 @media (max-width:560px){
   .svc-grid{grid-template-columns:1fr}
   .gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
   .container{padding:0 18px}
-  /* hero — flex column so stats never overlap CTAs */
-  #heroA{display:flex;flex-direction:column}
+  /* hero — flex column, overflow hidden so stats animate in from below viewport */
+  #heroA{display:flex;flex-direction:column;overflow:hidden}
   #heroA .container{
     flex:1;justify-content:center;
-    padding-top:90px;padding-bottom:20px;
+    padding-top:80px;padding-bottom:96px;
   }
-  #heroA .hl{font-size:clamp(54px,15vw,96px)}
+  #heroA .hl{font-size:clamp(66px,17vw,108px)}
   #heroA .sub{font-size:15px;margin-top:16px}
   #heroA .hero-cta{margin-top:22px}
   #heroA .hero-cta .btn{min-height:48px;padding:0 20px;font-size:15px}
   #heroA .hero-stats{
-    position:relative;bottom:auto;
+    position:absolute;bottom:0;
     flex-wrap:wrap;
     padding:16px 12px calc(16px + env(safe-area-inset-bottom));
     background:transparent;
@@ -473,8 +478,7 @@ section{position:relative}
   .map-wrap{min-height:220px}
   .map-wrap iframe{min-height:220px}
   /* footer */
-  .foot-bottom{flex-direction:column;gap:4px;font-size:11px}
-  .foot-bottom span:last-child{display:none}
+  .foot-bottom{flex-direction:column;gap:6px;font-size:14px;padding:16px 0 44px}
 }
 </style>
 </head>
@@ -718,10 +722,12 @@ section{position:relative}
 
 <!-- mobile sticky book -->
 <div class="mobile-book">
-  <div class="mb-status" id="mbStatus"><span class="dot off"></span><span id="mbTxt">Checking hours…</span></div>
   <div class="mb-row">
     <a class="mb-call" href="tel:0414723303" aria-label="Call us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></a>
-    <a class="btn btn-red mb-btn" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et" target="_blank" rel="noopener">Book Now — 5.0 ★</a>
+    <a class="btn btn-red mb-btn" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et" target="_blank" rel="noopener">
+      <span class="mb-open-label"><span class="dot off" id="mbDot"></span><span id="mbTxt">Checking hours…</span></span>
+      <span class="mb-btn-text">Book Now — 5.0 ★</span>
+    </a>
   </div>
 </div>
 
@@ -793,7 +799,7 @@ document.getElementById('hoursList').innerHTML=hours.map((h,i)=>`
   const now=new Date();const day=now.getDay();const h=now.getHours()+now.getMinutes()/60;
   const r=ranges[day];const open=r&&h>=r[0]&&h<r[1];
   const txt=document.getElementById('openTxt');const dot=document.querySelector('#openNow .dot');
-  const mbTxt=document.getElementById('mbTxt');const mbDot=document.querySelector('#mbStatus .dot');
+  const mbTxt=document.getElementById('mbTxt');const mbDot=document.getElementById('mbDot');
   if(open){
     txt.textContent="Open now — come on in";
     mbTxt.textContent="Open now";
