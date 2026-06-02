@@ -319,13 +319,13 @@ section{position:relative}
 .cycle-word{
   position:absolute;left:0;right:0;
   opacity:0;transform:translateY(105%);
-  transition:transform .7s var(--ease),opacity .55s;
+  transition:transform .95s var(--ease),opacity .7s;
 }
 .cycle-word.active{position:relative;opacity:1;transform:none}
 .cycle-word.exiting{
   position:absolute;left:0;right:0;
   opacity:0;transform:translateY(-105%);
-  transition:transform .4s var(--ease),opacity .3s;
+  transition:transform .6s var(--ease),opacity .45s;
 }
 
 /* ---------- responsive ---------- */
@@ -479,7 +479,7 @@ section{position:relative}
   }
   #heroA .hero-stats::before{left:0;background:linear-gradient(to right,rgba(8,12,16,.95),transparent)}
   #heroA .hero-stats::after{right:0;background:linear-gradient(to left,rgba(8,12,16,.95),transparent)}
-  .stats-track{display:flex;flex-wrap:nowrap;flex:none;animation:statsTicker 22s linear infinite;animation-play-state:paused}
+  #heroA .hero-stats .stats-track{display:flex;flex-wrap:nowrap;flex:none;animation:statsTicker 22s linear infinite;animation-play-state:paused}
   #heroA .hero-stats.in .stats-track{animation-play-state:running}
   @keyframes statsTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   #heroA .hero-stats .st{flex:0 0 auto;padding:14px 28px;align-items:center;opacity:1;transform:none;transition:none}
@@ -1018,7 +1018,7 @@ const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
     setTimeout(()=>old.classList.remove('exiting'),500);
   }
   /* start after hero entrance animation settles */
-  setTimeout(()=>setInterval(next,3400),1900);
+  setTimeout(()=>setInterval(next,2600),1900);
 })();
 </script>
 </body>
