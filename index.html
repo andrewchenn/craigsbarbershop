@@ -116,7 +116,7 @@ img{display:block;max-width:100%}
 #heroA .scrim{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 42%,rgba(8,12,16,.42) 0%,rgba(8,12,16,.6) 60%,rgba(8,12,16,.78) 100%),linear-gradient(180deg,rgba(8,12,16,.5) 0%,rgba(8,12,16,.2) 34%,rgba(8,12,16,.45) 72%,rgba(8,12,16,.9) 100%)}
 #heroA .container{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:74px 28px 132px}
 #heroA .eyebrow{color:#fff;opacity:.9;margin-bottom:22px}
-#heroA .hl{font-size:clamp(78px,12.5vw,196px);max-width:15ch;text-shadow:0 2px 40px rgba(0,0,0,.45)}
+#heroA .hl{font-size:clamp(86px,13.5vw,210px);max-width:15ch;text-shadow:0 2px 40px rgba(0,0,0,.45)}
 #heroA .hl .red{color:#ff5a5a}
 #heroA .sub{max-width:50ch;font-size:19px;color:rgba(255,255,255,.9);margin:24px auto 0;text-shadow:0 1px 20px rgba(0,0,0,.5)}
 #heroA .hero-cta{justify-content:center}
@@ -132,7 +132,7 @@ img{display:block;max-width:100%}
 
 /* Hero entrance + image reveal animations */
 @keyframes heroUp{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
-@keyframes statUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes statUp{from{opacity:0;transform:translateY(80px)}to{opacity:1;transform:none}}
 #heroA .container > *{opacity:0;animation:heroUp 1s var(--ease) forwards}
 #heroA .eyebrow{animation-delay:.15s}
 #heroA .hl{animation-delay:.3s}
@@ -324,17 +324,17 @@ section{position:relative}
   .mob-drawer{display:flex}
   .mob-phone-btn{display:flex}
   .rail-hint{display:flex}
-  /* mob phone btn in nav */
-  .mob-phone-btn{display:flex;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:#fff;align-items:center;justify-content:center;color:var(--ink);text-decoration:none;transition:.2s}
-  .mob-phone-btn svg{width:18px;height:18px}
-  .nav:not(.scrolled) .mob-phone-btn{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.35);color:#fff}
+  /* mob phone btn in nav — matches burger style, no border/bg */
+  .mob-phone-btn{display:flex;width:40px;height:40px;align-items:center;justify-content:center;color:var(--ink);text-decoration:none;background:none;border:0;padding:8px;transition:color .2s}
+  .mob-phone-btn svg{width:20px;height:20px}
+  .nav:not(.scrolled):not(.open) .mob-phone-btn{color:#fff}
   body.nav-open .mobile-book{visibility:hidden}
-  /* ---- mob drawer (slides from top) ---- */
+  /* ---- mob drawer (slides from right) ---- */
   .mob-drawer{
     position:fixed;inset:0;z-index:95;
     background:var(--ink);color:#fff;
     display:flex;flex-direction:column;
-    transform:translateY(-100%);transition:transform .42s var(--ease);
+    transform:translateX(100%);transition:transform .42s var(--ease);
     padding:0 28px calc(28px + env(safe-area-inset-bottom));
   }
   .mob-drawer.open{transform:none}
@@ -351,10 +351,10 @@ section{position:relative}
     font-family:"Bebas Neue",sans-serif;font-size:clamp(38px,11vw,52px);line-height:1.15;
     display:flex;align-items:center;justify-content:space-between;
     padding:7px 0;color:#fff;border-bottom:1px solid rgba(255,255,255,.1);
-    opacity:0;transform:translateY(14px);
+    opacity:0;transform:translateX(28px);
   }
   .mob-drawer-nav a .n{font-family:"DM Sans";font-size:13px;font-weight:700;color:rgba(255,255,255,.38)}
-  @keyframes drawerItemIn{to{opacity:1;transform:none}}
+  @keyframes drawerItemIn{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
   .mob-drawer.open .mob-drawer-nav a{animation:drawerItemIn .45s var(--ease) forwards}
   .mob-drawer.open .mob-drawer-nav a:nth-child(1){animation-delay:.06s}
   .mob-drawer.open .mob-drawer-nav a:nth-child(2){animation-delay:.12s}
@@ -377,6 +377,7 @@ section{position:relative}
   }
   .svc-grid::-webkit-scrollbar{display:none}
   .svc-grid .svc{scroll-snap-align:start;flex:0 0 80%;max-width:320px;display:flex !important}
+  .svc-grid .svc:hover{transform:none;box-shadow:none;border-color:var(--line)}
   .svc-hidden{display:flex !important}
   .svc-more{display:none !important}
   .rail-hint{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12.5px;margin-top:14px;font-weight:600;padding:0 18px}
@@ -530,7 +531,7 @@ section{position:relative}
   <div class="container">
     <span class="eyebrow">Barbershop · Thornton Shopping Centre</span>
     <h1 class="hl">Precision cuts.<br /><span class="red">Thornton's</span> own.</h1>
-    <p class="sub">Sharp cuts. Expert beards. Thornton's own.</p>
+    <p class="sub">A modern barbershop in the heart of Thornton. Precision cuts, fades and expert beard work — for every age.</p>
     <div class="hero-cta">
       <a class="btn btn-red" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et" target="_blank" rel="noopener">Book Now on Fresha</a>
       <a class="btn btn-ghost-light" href="#services">See Services</a>
@@ -557,7 +558,7 @@ section{position:relative}
     </div>
     <div class="svc-grid" id="svcGrid"></div>
     <div class="rail-hint" id="railHint"><span class="rail-dots" id="svcDots"></span><span>Swipe for more</span></div>
-    <p class="svc-note reveal"><span class="pole" style="width:30px;height:7px"></span> Prices shown are starting rates and may vary with length and style. Full menu &amp; live availability on Fresha.</p>
+    <p class="svc-note reveal">Prices shown are starting rates and may vary with length and style. Full menu &amp; live availability on Fresha.</p>
   </div>
 </section>
 
