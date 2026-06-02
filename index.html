@@ -888,6 +888,17 @@ addEventListener('scroll',()=>{
   mobileBook.classList.toggle('show',show);
   document.body.classList.toggle('mb-active',show);
 },{passive:true});
+/* Fix .mobile-book in Instagram/in-app browsers — visualViewport API corrects
+   bottom:0 when the browser chrome changes the visible area */
+(function(){
+  if(!window.visualViewport||!mobileBook)return;
+  const fix=()=>{
+    const gap=Math.round(window.innerHeight-window.visualViewport.height-window.visualViewport.offsetTop);
+    mobileBook.style.bottom=Math.max(0,gap)+'px';
+  };
+  window.visualViewport.addEventListener('resize',fix,{passive:true});
+  window.visualViewport.addEventListener('scroll',fix,{passive:true});
+})();
 /* mob drawer */
 const mobDrawer=document.getElementById('mobDrawer');
 const openDrawer=()=>{mobDrawer.classList.add('open');document.body.style.overflow='hidden';document.body.classList.add('nav-open');};
