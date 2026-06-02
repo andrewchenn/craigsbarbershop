@@ -42,23 +42,24 @@ img{display:block;max-width:100%}
 .eyebrow.blue{color:var(--blue)}
 
 /* ---- barber pole stripe motif ---- */
+/* background-size = pattern-period ÷ sin(65°) for seamless horizontal scroll at 115deg */
 .stripe-bar{
   height:6px;width:100%;
   background:repeating-linear-gradient(115deg,
     var(--red) 0 14px,#fff 14px 22px,var(--blue) 22px 36px,#fff 36px 44px);
-  background-size:88px 100%;
-  animation:stripeMove 2s linear infinite;
+  background-size:48.6px 100%;
+  animation:stripeMove 1.6s linear infinite;
 }
 .pole{
   position:relative;overflow:hidden;border-radius:99px;
   background:repeating-linear-gradient(115deg,
     var(--red) 0 10px,#fff 10px 16px,var(--blue) 16px 26px,#fff 26px 32px);
-  background-size:62px 100%;
-  animation:poleMove 1.6s linear infinite;
+  background-size:35.3px 100%;
+  animation:poleMove 1.2s linear infinite;
   box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);
 }
-@keyframes poleMove{to{background-position:62px 0}}
-@keyframes stripeMove{to{background-position:88px 0}}
+@keyframes poleMove{to{background-position:35.3px 0}}
+@keyframes stripeMove{to{background-position:48.6px 0}}
 @media (prefers-reduced-motion:reduce){.pole{animation:none}.stripe-bar{animation:none}}
 
 /* buttons */
@@ -306,6 +307,21 @@ section{position:relative}
 .word.fire{animation:wordUp .42s var(--ease) both}
 @media(prefers-reduced-motion:reduce){.word{opacity:1}.word.fire{animation:none}}
 
+/* ---------- cycling hero headline ---------- */
+.hl-static{display:block}
+.cycle-wrap{display:block;position:relative;overflow:hidden}
+.cycle-word{
+  position:absolute;left:0;right:0;
+  opacity:0;transform:translateY(105%);
+  transition:transform .55s var(--ease),opacity .45s;
+}
+.cycle-word.active{position:relative;opacity:1;transform:none}
+.cycle-word.exiting{
+  position:absolute;left:0;right:0;
+  opacity:0;transform:translateY(-105%);
+  transition:transform .4s var(--ease),opacity .3s;
+}
+
 /* ---------- responsive ---------- */
 @media (max-width:1080px){
   .svc-grid{grid-template-columns:repeat(2,1fr)}
@@ -540,7 +556,7 @@ section{position:relative}
   <div class="scrim"></div>
   <div class="container">
     <span class="eyebrow">Barbershop · Thornton Shopping Centre</span>
-    <h1 class="hl">Precision cuts.<br /><span class="red">Thornton's</span> own.</h1>
+    <h1 class="hl"><span class="hl-static">Precision</span><span class="cycle-wrap" id="heroCycleWrap"><span class="cycle-word active">cuts.</span><span class="cycle-word">fades.</span><span class="cycle-word">trims.</span><span class="cycle-word">beards.</span><span class="cycle-word">styling.</span></span><span class="hl-static"><span class="red">Thornton's</span> own.</span></h1>
     <p class="sub">A modern barbershop in the heart of Thornton. Precision cuts, fades and expert beard work — for every age.</p>
     <div class="hero-cta">
       <a class="btn btn-red" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et" target="_blank" rel="noopener">Book Now on Fresha</a>
@@ -920,14 +936,6 @@ if(!reduce){setTimeout(()=>document.querySelectorAll('#heroA .hero-stats [data-c
     });
   }
 
-  /* hero headline only */
-  const heroHl=document.querySelector('#heroA .hl');
-  if(heroHl){
-    const words=splitWords(heroHl);
-    heroHl.style.opacity='1';heroHl.style.animation='none';
-    fire(words,0.32);
-  }
-
   /* section headings — fire when scrolled into view */
   document.querySelectorAll('h2,h3').forEach(el=>{
     if(el.closest('#heroA'))return;
@@ -941,6 +949,22 @@ if(!reduce){setTimeout(()=>document.querySelectorAll('#heroA .hero-stats [data-c
     },{threshold:0.25,rootMargin:'0px 0px -6% 0px'});
     obs.observe(el);
   });
+})();
+
+/* hero headline word cycle */
+(function(){
+  const words=[...document.querySelectorAll('.cycle-word')];
+  if(!words.length)return;
+  let cur=0;
+  function next(){
+    const old=words[cur];
+    cur=(cur+1)%words.length;
+    old.classList.add('exiting');old.classList.remove('active');
+    words[cur].classList.add('active');
+    setTimeout(()=>old.classList.remove('exiting'),500);
+  }
+  /* start after hero entrance animation settles */
+  setTimeout(()=>setInterval(next,2200),1900);
 })();
 </script>
 </body>
