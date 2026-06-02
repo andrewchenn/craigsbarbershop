@@ -182,6 +182,9 @@ section{position:relative}
 .svc.ladies .dur{color:var(--red)}
 .svc-note{margin-top:26px;color:var(--muted);font-size:14px;display:flex;align-items:center;gap:10px}
 .svc-more{display:none}
+.mob-drawer{display:none}
+.mob-phone-btn{display:none}
+.rail-hint{display:none}
 
 /* ---------- HOURS ---------- */
 .hours{background:var(--surface)}
@@ -316,33 +319,79 @@ section{position:relative}
   .nav:not(.scrolled):not(.open){background:transparent;border-color:transparent;box-shadow:none}
   .nav:not(.scrolled):not(.open) .nav-logo img{filter:brightness(0) invert(1)}
   .nav:not(.scrolled):not(.open) .burger span{background:#fff}
-  /* full-screen overlay — slides in from right */
-  .nav-links{
-    position:fixed;inset:0;z-index:59;
-    display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0;
-    background:#0b0d10;
-    transform:translateX(100%);
-    transition:transform .42s var(--ease);
-  }
-  .nav.open{background:var(--ink);border-color:transparent;box-shadow:none}
-  .nav.open .nav-logo img{filter:brightness(0) invert(1)}
-  .nav.open .nav-links{transform:translateX(0)}
+  /* hide desktop nav links on mobile */
+  .nav-links{display:none}
+  .mob-drawer{display:flex}
+  .mob-phone-btn{display:flex}
+  .rail-hint{display:flex}
+  /* mob phone btn in nav */
+  .mob-phone-btn{display:flex;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:#fff;align-items:center;justify-content:center;color:var(--ink);text-decoration:none;transition:.2s}
+  .mob-phone-btn svg{width:18px;height:18px}
+  .nav:not(.scrolled) .mob-phone-btn{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.35);color:#fff}
   body.nav-open .mobile-book{visibility:hidden}
-  .nav-links a.lnk{
-    font-family:"Bebas Neue",sans-serif;font-size:clamp(36px,10vw,52px);
-    letter-spacing:.04em;color:rgba(255,255,255,.7);
-    padding:14px 0;width:100%;text-align:center;
-    opacity:0;transform:translateX(36px);
-    transition:opacity .3s var(--ease),transform .3s var(--ease),color .2s;
+  /* ---- mob drawer (slides from top) ---- */
+  .mob-drawer{
+    position:fixed;inset:0;z-index:95;
+    background:var(--ink);color:#fff;
+    display:flex;flex-direction:column;
+    transform:translateY(-100%);transition:transform .42s var(--ease);
+    padding:0 28px calc(28px + env(safe-area-inset-bottom));
   }
-  .nav-links a.lnk::after{display:none}
-  .nav-links a.lnk:hover{color:#fff}
-  .nav.open .nav-links a.lnk{opacity:1;transform:none}
-  .nav.open .nav-links a.lnk:nth-child(1){transition-delay:.08s}
-  .nav.open .nav-links a.lnk:nth-child(2){transition-delay:.14s}
-  .nav.open .nav-links a.lnk:nth-child(3){transition-delay:.20s}
-  .nav.open .nav-links a.lnk:nth-child(4){transition-delay:.26s}
-  .nav.open .nav-links a.lnk:nth-child(5){transition-delay:.32s}
+  .mob-drawer.open{transform:none}
+  .mob-drawer-top{height:60px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+  .mob-drawer-top img{height:22px}
+  .mob-drawer-close{
+    width:44px;height:44px;border-radius:12px;
+    border:1px solid rgba(255,255,255,.22);background:transparent;color:#fff;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+  }
+  .mob-drawer-close svg{width:22px;height:22px}
+  .mob-drawer-nav{display:flex;flex-direction:column;flex:1;justify-content:center;border-top:1px solid rgba(255,255,255,.1)}
+  .mob-drawer-nav a{
+    font-family:"Bebas Neue",sans-serif;font-size:clamp(38px,11vw,52px);line-height:1.15;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:7px 0;color:#fff;border-bottom:1px solid rgba(255,255,255,.1);
+    opacity:0;transform:translateY(14px);
+  }
+  .mob-drawer-nav a .n{font-family:"DM Sans";font-size:13px;font-weight:700;color:rgba(255,255,255,.38)}
+  @keyframes drawerItemIn{to{opacity:1;transform:none}}
+  .mob-drawer.open .mob-drawer-nav a{animation:drawerItemIn .45s var(--ease) forwards}
+  .mob-drawer.open .mob-drawer-nav a:nth-child(1){animation-delay:.06s}
+  .mob-drawer.open .mob-drawer-nav a:nth-child(2){animation-delay:.12s}
+  .mob-drawer.open .mob-drawer-nav a:nth-child(3){animation-delay:.18s}
+  .mob-drawer.open .mob-drawer-nav a:nth-child(4){animation-delay:.24s}
+  .mob-drawer.open .mob-drawer-nav a:nth-child(5){animation-delay:.30s}
+  .mob-drawer-foot{display:flex;flex-direction:column;gap:12px;padding-top:18px;flex-shrink:0}
+  .mob-drawer-call{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:600;color:rgba(255,255,255,.78);font-size:15px;text-decoration:none}
+  .mob-drawer-call svg{width:16px;height:16px}
+  /* hero left-align */
+  #heroA .container{align-items:flex-start;text-align:left}
+  #heroA .hero-cta{justify-content:flex-start}
+  #heroA .sub{margin-left:0}
+  /* services rail */
+  .svc-grid{
+    display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+    scrollbar-width:none;gap:14px;
+    padding:4px 18px 8px;margin:0 -18px;
+    grid-template-columns:unset;
+  }
+  .svc-grid::-webkit-scrollbar{display:none}
+  .svc-grid .svc{scroll-snap-align:start;flex:0 0 80%;max-width:320px;display:flex !important}
+  .svc-hidden{display:flex !important}
+  .svc-more{display:none !important}
+  .rail-hint{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12.5px;margin-top:14px;font-weight:600;padding:0 18px}
+  .rail-dots{display:flex;gap:5px}
+  .rail-dot{width:6px;height:6px;border-radius:50%;background:var(--line);display:block;transition:.25s}
+  .rail-dot.on{background:var(--red);width:18px;border-radius:99px}
+  /* sticky bar layout */
+  .mb-row{display:flex;gap:10px;align-items:center}
+  .mb-call{
+    flex:none;width:52px;height:52px;border-radius:99px;
+    border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;color:var(--ink);
+  }
+  .mb-call svg{width:20px;height:20px}
+  .mb-btn{flex:1;min-height:52px}
+  .mb-status{justify-content:center}
   /* mobile sticky bar — hidden until scroll */
   .mobile-book{
     display:block;
@@ -447,10 +496,30 @@ section{position:relative}
         0414 723 303
       </a>
       <a class="btn btn-red" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et" target="_blank" rel="noopener">Book Now</a>
+      <a class="mob-phone-btn" href="tel:0414723303" aria-label="Call us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></a>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
+
+<!-- mob drawer (mobile only) -->
+<div class="mob-drawer" id="mobDrawer">
+  <div class="mob-drawer-top">
+    <img src="assets/logo-white.png" alt="Craig's Barbershop" />
+    <button class="mob-drawer-close" id="mobDrawerClose" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <nav class="mob-drawer-nav" id="mobDrawerNav">
+    <a href="#services"><span>Services</span><span class="n">01</span></a>
+    <a href="#hours"><span>Hours</span><span class="n">02</span></a>
+    <a href="#about"><span>About</span><span class="n">03</span></a>
+    <a href="#gallery"><span>Gallery</span><span class="n">04</span></a>
+    <a href="#find"><span>Find Us</span><span class="n">05</span></a>
+  </nav>
+  <div class="mob-drawer-foot">
+    <a class="btn btn-red" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et" target="_blank" rel="noopener">Book Now on Fresha</a>
+    <a class="mob-drawer-call" href="tel:0414723303"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg> 0414 723 303</a>
+  </div>
+</div>
 
 <span id="top"></span>
 
@@ -487,6 +556,7 @@ section{position:relative}
       <p class="reveal d1">Traditional cuts, modern styles and clean beard work — for blokes, kids and ladies alike. Tap any service to book your time on Fresha.</p>
     </div>
     <div class="svc-grid" id="svcGrid"></div>
+    <div class="rail-hint" id="railHint"><span class="rail-dots" id="svcDots"></span><span>Swipe for more</span></div>
     <p class="svc-note reveal"><span class="pole" style="width:30px;height:7px"></span> Prices shown are starting rates and may vary with length and style. Full menu &amp; live availability on Fresha.</p>
   </div>
 </section>
@@ -640,7 +710,7 @@ section{position:relative}
     </div>
   </div>
   <div class="container foot-bottom">
-    <span>© <span id="yr"></span> Craig's Barbershop, Thornton. All rights reserved.</span>
+    <span>© <span id="yr"></span> Craig's Barbershop, Thornton.</span>
     <span>Bookings powered by Fresha · 5.0 ★ (199 reviews)</span>
   </div>
 </footer>
@@ -648,7 +718,10 @@ section{position:relative}
 <!-- mobile sticky book -->
 <div class="mobile-book">
   <div class="mb-status" id="mbStatus"><span class="dot off"></span><span id="mbTxt">Checking hours…</span></div>
-  <a class="btn btn-red" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et" target="_blank" rel="noopener">Book Now on Fresha</a>
+  <div class="mb-row">
+    <a class="mb-call" href="tel:0414723303" aria-label="Call us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></a>
+    <a class="btn btn-red mb-btn" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et" target="_blank" rel="noopener">Book Now — 5.0 ★</a>
+  </div>
 </div>
 
 <!-- lightbox -->
@@ -754,7 +827,7 @@ lb.querySelector('.lb-close').addEventListener('click',()=>lb.classList.remove('
 lb.addEventListener('click',e=>{if(e.target===lb)lb.classList.remove('open');});
 document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')lb.classList.remove('open');if(e.key==='ArrowRight')openLb(cur+1);if(e.key==='ArrowLeft')openLb(cur-1);});
 
-/* nav scrolled + burger + mobile sticky bar */
+/* nav scrolled + mob drawer + mobile sticky bar */
 const nav=document.getElementById('nav');
 const mobileBook=document.querySelector('.mobile-book');
 addEventListener('scroll',()=>{
@@ -764,19 +837,28 @@ addEventListener('scroll',()=>{
   mobileBook.classList.toggle('show',show);
   document.body.classList.toggle('mb-active',show);
 },{passive:true});
-document.getElementById('burger').addEventListener('click',()=>{
-  nav.classList.toggle('open');
-  const isOpen=nav.classList.contains('open');
-  document.body.style.overflow=isOpen?'hidden':'';
-  document.body.classList.toggle('nav-open',isOpen);
-});
-document.getElementById('navLinks').addEventListener('click',e=>{
-  if(e.target.classList.contains('lnk')){
-    nav.classList.remove('open');
-    document.body.style.overflow='';
-    document.body.classList.remove('nav-open');
-  }
-});
+/* mob drawer */
+const mobDrawer=document.getElementById('mobDrawer');
+const openDrawer=()=>{mobDrawer.classList.add('open');document.body.style.overflow='hidden';document.body.classList.add('nav-open');};
+const closeDrawer=()=>{mobDrawer.classList.remove('open');document.body.style.overflow='';document.body.classList.remove('nav-open');};
+document.getElementById('burger').addEventListener('click',openDrawer);
+document.getElementById('mobDrawerClose').addEventListener('click',closeDrawer);
+document.getElementById('mobDrawerNav').addEventListener('click',e=>{if(e.target.closest('a'))closeDrawer();});
+/* service rail dots (mobile) */
+(function(){
+  const grid=document.getElementById('svcGrid');
+  const dotsWrap=document.getElementById('svcDots');
+  const cards=grid.querySelectorAll('.svc');
+  const nDots=Math.min(cards.length,8);
+  dotsWrap.innerHTML=Array.from({length:nDots},(_,i)=>`<span class="rail-dot${i===0?' on':''}"></span>`).join('');
+  const dots=[...dotsWrap.children];
+  grid.addEventListener('scroll',()=>{
+    const max=grid.scrollWidth-grid.clientWidth;
+    const p=max>0?grid.scrollLeft/max:0;
+    const idx=Math.round(p*(nDots-1));
+    dots.forEach((d,i)=>d.classList.toggle('on',i===idx));
+  },{passive:true});
+})();
 
 /* reveal on scroll */
 const io=new IntersectionObserver((ents)=>{ents.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:"0px 0px -8% 0px"});
