@@ -89,9 +89,9 @@ img{display:block;max-width:100%}
   border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s;
 }
 .nav.scrolled{border-color:var(--line);box-shadow:0 6px 30px -22px rgba(0,0,0,.5)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px;position:relative}
 .nav-logo img{height:26px}
-.nav-links{display:flex;align-items:center;gap:34px}
+.nav-links{display:flex;align-items:center;gap:34px;position:absolute;left:50%;transform:translateX(-50%)}
 .nav-links a.lnk{font-weight:600;font-size:15px;color:var(--ink-2);position:relative;padding:4px 0}
 .nav-links a.lnk::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--red);transition:right .25s var(--ease)}
 .nav-links a.lnk:hover::after{right:0}
