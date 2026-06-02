@@ -135,15 +135,17 @@ img{display:block;max-width:100%}
 
 /* Hero entrance + image reveal animations */
 @keyframes heroUp{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
-@keyframes statUp{from{opacity:0;transform:translateY(160px)}to{opacity:1;transform:none}}
 #heroA .container > *{opacity:0;animation:heroUp 1s var(--ease) forwards}
 #heroA .eyebrow{animation-delay:.15s}
 #heroA .hl{animation-delay:.3s}
 #heroA .sub{animation-delay:.52s}
 #heroA .hero-cta{animation-delay:.68s}
-#heroA .hero-stats{opacity:0;animation:statUp .9s var(--ease) .82s forwards}
+/* stats: each item fades+rises in via JS IntersectionObserver */
+#heroA .hero-stats .st{opacity:0;transform:translateY(28px);transition:opacity 1.3s var(--ease),transform 1.3s var(--ease)}
+#heroA .hero-stats .st.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
-  #heroA .container > *,#heroA .hero-stats{opacity:1;animation:none}
+  #heroA .container > *{opacity:1;animation:none}
+  #heroA .hero-stats .st{opacity:1;transform:none;transition:none}
 }
 
 /* ---------- TRUST STRIP ---------- */
@@ -313,7 +315,7 @@ section{position:relative}
 .cycle-word{
   position:absolute;left:0;right:0;
   opacity:0;transform:translateY(105%);
-  transition:transform .55s var(--ease),opacity .45s;
+  transition:transform .7s var(--ease),opacity .55s;
 }
 .cycle-word.active{position:relative;opacity:1;transform:none}
 .cycle-word.exiting{
@@ -392,7 +394,8 @@ section{position:relative}
   .svc-grid{
     display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
     scrollbar-width:none;gap:14px;
-    padding:4px 18px 8px 28px;margin:0 -18px;
+    padding:4px 18px 8px 32px;margin:0 -18px;
+    scroll-padding-left:32px;
     grid-template-columns:unset;
   }
   .svc-grid::-webkit-scrollbar{display:none}
@@ -462,7 +465,6 @@ section{position:relative}
     flex-wrap:wrap;justify-content:space-around;
     padding:22px 10px;
     background:rgba(8,12,16,.95);
-    opacity:1;animation:none;
   }
   #heroA .hero-stats .st{flex:0 0 50%;padding:10px 4px;align-items:center}
   #heroA .hero-stats .st + .st::before{display:none}
@@ -901,7 +903,21 @@ function countUp(el){
 }
 
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-if(!reduce){setTimeout(()=>document.querySelectorAll('#heroA .hero-stats [data-count]').forEach(countUp),950);}
+
+/* stats: animate each item in when the section scrolls into view */
+(function(){
+  const statsEl=document.querySelector('#heroA .hero-stats');
+  if(!statsEl)return;
+  const items=[...statsEl.querySelectorAll('.st')];
+  if(reduce){items.forEach(el=>el.classList.add('in'));return;}
+  const obs=new IntersectionObserver(([en])=>{
+    if(!en.isIntersecting)return;
+    items.forEach((item,i)=>setTimeout(()=>item.classList.add('in'),i*180));
+    setTimeout(()=>statsEl.querySelectorAll('[data-count]').forEach(countUp),360);
+    obs.disconnect();
+  },{threshold:0.18});
+  obs.observe(statsEl);
+})();
 
 /* word-by-word stagger */
 (function(){
@@ -964,7 +980,7 @@ if(!reduce){setTimeout(()=>document.querySelectorAll('#heroA .hero-stats [data-c
     setTimeout(()=>old.classList.remove('exiting'),500);
   }
   /* start after hero entrance animation settles */
-  setTimeout(()=>setInterval(next,2200),1900);
+  setTimeout(()=>setInterval(next,3400),1900);
 })();
 </script>
 </body>
