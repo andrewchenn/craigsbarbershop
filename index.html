@@ -1132,6 +1132,13 @@ const HAIRCUT_COUNT = 99864;
   const carousel=document.getElementById('reviewCarousel');
   carousel.addEventListener('touchstart',()=>carousel.classList.add('paused'),{passive:true});
   carousel.addEventListener('touchend',()=>setTimeout(()=>carousel.classList.remove('paused'),1800),{passive:true});
+  if(window.matchMedia('(max-width:880px)').matches){
+    requestAnimationFrame(()=>{
+      const cards=carousel.querySelectorAll('.review-card');
+      const mid=cards[Math.floor(reviews.length/2)];
+      if(mid)carousel.scrollLeft=mid.offsetLeft-(carousel.offsetWidth-mid.offsetWidth)/2;
+    });
+  }
 })();
 
 /* ===== WHY LOCALS GRID ===== */
@@ -1202,6 +1209,13 @@ const HAIRCUT_COUNT = 99864;
   const carousel=document.getElementById('offerCarousel');
   carousel.addEventListener('touchstart',()=>carousel.classList.add('paused'),{passive:true});
   carousel.addEventListener('touchend',()=>setTimeout(()=>carousel.classList.remove('paused'),1800),{passive:true});
+  if(window.matchMedia('(max-width:880px)').matches){
+    requestAnimationFrame(()=>{
+      const cards=carousel.querySelectorAll('.offer-card');
+      const mid=cards[Math.floor(offers.length/2)];
+      if(mid)carousel.scrollLeft=mid.offsetLeft-(carousel.offsetWidth-mid.offsetWidth)/2;
+    });
+  }
 })();
 </script>
 </body>
