@@ -388,6 +388,14 @@ section{position:relative}
   .mob-drawer.open .mob-drawer-nav a:nth-child(3){animation-delay:.18s}
   .mob-drawer.open .mob-drawer-nav a:nth-child(4){animation-delay:.24s}
   .mob-drawer.open .mob-drawer-nav a:nth-child(5){animation-delay:.30s}
+  .mob-drawer.open .mob-drawer-nav a:nth-child(6){animation-delay:.36s}
+  .mob-drawer.open .mob-drawer-nav a:nth-child(7){animation-delay:.42s}
+  /* review carousel — swipeable rail on mobile (same pattern as services) */
+  .review-carousel-outer{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -18px}
+  .review-carousel-outer::-webkit-scrollbar{display:none}
+  .review-carousel-outer::before,.review-carousel-outer::after{display:none}
+  .review-track{animation:none !important;padding:4px 18px 16px 28px;scroll-padding-left:28px}
+  .review-card{scroll-snap-align:start;flex:0 0 82%;max-width:300px}
   .mob-drawer-foot{display:flex;flex-direction:column;gap:12px;padding-top:18px;flex-shrink:0}
   .mob-drawer-call{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:600;color:rgba(255,255,255,.78);font-size:15px;text-decoration:none}
   .mob-drawer-call svg{width:16px;height:16px}
@@ -517,7 +525,12 @@ section{position:relative}
     justify-content:center;
     padding-top:80px;padding-bottom:40px;
   }
-  #heroA .hl{font-size:clamp(32px,8.5vw,50px)}
+  #heroA .hl{font-size:clamp(46px,12vw,62px)}
+  .hero-trust{flex-direction:row;align-items:center;gap:14px;margin-top:14px}
+  .hero-count-wrap{flex-wrap:nowrap;gap:6px}
+  .hero-stars-lg{font-size:16px;letter-spacing:2px}
+  .hero-count-num{font-size:clamp(24px,6.5vw,32px)}
+  .hero-count-lbl{font-size:10.5px;letter-spacing:.08em}
   .hl-static{white-space:normal}
   #heroA .sub{font-size:15px;margin-top:16px}
   #heroA .hero-cta{margin-top:22px}
@@ -587,10 +600,10 @@ section{position:relative}
   <div class="container nav-inner">
     <a href="#top" class="nav-logo" aria-label="Craig's Barbershop home"><img src="assets/logo-dark.png" alt="Craig's Barbershop" /></a>
     <nav class="nav-links" id="navLinks">
+      <a class="lnk" href="#reviews">Reviews</a>
       <a class="lnk" href="#services">Services</a>
       <a class="lnk" href="#hours">Hours</a>
       <a class="lnk" href="#about">About</a>
-      <a class="lnk" href="#gallery">Gallery</a>
       <a class="lnk" href="#find">Find Us</a>
     </nav>
     <div class="nav-cta">
@@ -612,11 +625,12 @@ section{position:relative}
     <button class="mob-drawer-close" id="mobDrawerClose" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
   </div>
   <nav class="mob-drawer-nav" id="mobDrawerNav">
-    <a href="#services"><span>Services</span><span class="n">01</span></a>
-    <a href="#hours"><span>Hours</span><span class="n">02</span></a>
-    <a href="#about"><span>About</span><span class="n">03</span></a>
-    <a href="#gallery"><span>Gallery</span><span class="n">04</span></a>
-    <a href="#find"><span>Find Us</span><span class="n">05</span></a>
+    <a href="#reviews"><span>Reviews</span><span class="n">01</span></a>
+    <a href="#services"><span>Services</span><span class="n">02</span></a>
+    <a href="#hours"><span>Hours</span><span class="n">03</span></a>
+    <a href="#offers"><span>Offers</span><span class="n">04</span></a>
+    <a href="#about"><span>About</span><span class="n">05</span></a>
+    <a href="#find"><span>Find Us</span><span class="n">06</span></a>
   </nav>
   <div class="mob-drawer-foot">
     <a class="btn btn-red" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et/all-offer?venue=true" target="_blank" rel="noopener">Book Now on Fresha</a>
