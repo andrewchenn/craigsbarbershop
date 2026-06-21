@@ -1212,7 +1212,7 @@ const HAIRCUT_COUNT = 99864;
   if(window.matchMedia('(max-width:880px)').matches){
     requestAnimationFrame(()=>{
       const cards=carousel.querySelectorAll('.offer-card');
-      const mid=cards[Math.floor(offers.length/2)];
+      const mid=cards[5];
       if(mid)carousel.scrollLeft=mid.offsetLeft-(carousel.offsetWidth-mid.offsetWidth)/2;
     });
   }
