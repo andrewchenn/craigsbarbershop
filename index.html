@@ -122,7 +122,7 @@ img{display:block;max-width:100%}
 #heroA .scrim{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 42%,rgba(8,12,16,.42) 0%,rgba(8,12,16,.6) 60%,rgba(8,12,16,.78) 100%),linear-gradient(180deg,rgba(8,12,16,.5) 0%,rgba(8,12,16,.2) 34%,rgba(8,12,16,.45) 72%,rgba(8,12,16,.9) 100%)}
 #heroA .container{position:relative;z-index:4;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:74px 28px 160px}
 #heroA .eyebrow{color:#fff;opacity:.9;margin-bottom:22px}
-#heroA .hl{font-size:clamp(56px,8vw,114px);max-width:15ch;text-shadow:0 2px 40px rgba(0,0,0,.45)}
+#heroA .hl{font-size:clamp(38px,5vw,70px);max-width:22ch;text-shadow:0 2px 40px rgba(0,0,0,.45)}
 #heroA .hl .red{color:#ff5a5a}
 #heroA .sub{max-width:50ch;font-size:19px;color:rgba(255,255,255,.9);margin:24px auto 0;text-shadow:0 1px 20px rgba(0,0,0,.5)}
 #heroA .hero-cta{justify-content:center}
@@ -141,10 +141,10 @@ img{display:block;max-width:100%}
 /* Hero entrance + image reveal animations */
 @keyframes heroUp{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
 #heroA .container > *{opacity:0;animation:heroUp 1s var(--ease) forwards}
-#heroA .eyebrow{animation-delay:.15s}
-#heroA .hl{animation-delay:.3s}
-#heroA .sub{animation-delay:.52s}
-#heroA .hero-cta{animation-delay:.68s}
+#heroA .hl{animation-delay:.2s}
+#heroA .hero-trust{animation-delay:.38s;opacity:0;animation:heroUp 1s var(--ease) forwards}
+#heroA .sub{animation-delay:.54s}
+#heroA .hero-cta{animation-delay:.70s}
 /* stats: each item fades+rises in via JS IntersectionObserver */
 #heroA .hero-stats .st{opacity:0;transform:translateY(28px);transition:opacity 1.3s var(--ease),transform 1.3s var(--ease)}
 #heroA .hero-stats .st.in{opacity:1;transform:none}
@@ -391,8 +391,6 @@ section{position:relative}
   .mob-drawer-foot{display:flex;flex-direction:column;gap:12px;padding-top:18px;flex-shrink:0}
   .mob-drawer-call{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:600;color:rgba(255,255,255,.78);font-size:15px;text-decoration:none}
   .mob-drawer-call svg{width:16px;height:16px}
-  /* hide eyebrow on mobile */
-  #heroA .eyebrow{display:none}
   /* hero left-align */
   #heroA .container{align-items:flex-start;text-align:left}
   #heroA .hero-cta{justify-content:flex-start}
@@ -451,6 +449,62 @@ section{position:relative}
   body.mb-active{padding-bottom:62px}
 }
 
+/* ===== HERO COUNTER ===== */
+.hero-trust{display:flex;flex-direction:column;align-items:center;gap:8px;margin:20px auto 0}
+.hero-stars-lg{font-size:26px;letter-spacing:4px;color:#ffce4d;line-height:1}
+.hero-count-wrap{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;justify-content:center}
+.hero-count-num{font-family:"Bebas Neue",sans-serif;font-size:clamp(44px,5.5vw,70px);color:#fff;line-height:1;transition:transform .3s var(--ease),opacity .2s}
+.hero-count-lbl{font-size:14px;font-weight:700;color:rgba(255,255,255,.8);text-transform:uppercase;letter-spacing:.14em}
+@media(max-width:880px){.hero-trust{align-items:flex-start}.hero-count-wrap{justify-content:flex-start}}
+@media(prefers-reduced-motion:reduce){.hero-count-num{transition:none}}
+
+/* ===== REVIEWS ===== */
+.reviews{background:var(--white);overflow:hidden}
+.reviews .sec-head{margin-bottom:40px}
+.review-carousel-outer{position:relative;margin:0 -28px}
+.review-carousel-outer::before,.review-carousel-outer::after{content:'';position:absolute;top:0;bottom:0;width:110px;z-index:4;pointer-events:none}
+.review-carousel-outer::before{left:0;background:linear-gradient(to right,#fff 0%,transparent 100%)}
+.review-carousel-outer::after{right:0;background:linear-gradient(to left,#fff 0%,transparent 100%)}
+.review-track{display:flex;gap:20px;padding:8px 28px 20px;width:max-content;animation:reviewScroll 60s linear infinite}
+.review-carousel-outer.paused .review-track,.review-carousel-outer:hover .review-track{animation-play-state:paused}
+@keyframes reviewScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.review-card{flex:0 0 320px;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:24px;box-shadow:0 6px 28px -10px rgba(0,0,0,.09);display:flex;flex-direction:column;gap:14px}
+.rc-top{display:flex;align-items:center;gap:14px}
+.rc-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff;flex:none}
+.rc-info .rc-name{font-weight:700;font-size:15.5px;color:var(--ink);line-height:1.2}
+.rc-info .rc-stars{color:#ff8c00;font-size:17px;letter-spacing:1px;margin-top:2px}
+.rc-text{color:var(--muted);font-size:15px;line-height:1.6}
+@media(prefers-reduced-motion:reduce){.review-track{animation:none;flex-wrap:wrap}}
+
+/* ===== WHY LOCALS ===== */
+.why{background:var(--surface)}
+.why-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:48px}
+.why-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 16px;display:flex;align-items:flex-start;gap:12px;transition:transform .22s var(--ease),box-shadow .22s,border-color .22s}
+.why-card:hover{transform:translateY(-4px);box-shadow:0 20px 46px -22px rgba(0,0,0,.28);border-color:transparent}
+.why-check{width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;flex:none;font-size:13px;font-weight:700;margin-top:1px}
+.why-text{font-weight:600;font-size:14.5px;line-height:1.4;color:var(--ink)}
+@media(max-width:1080px){.why-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.why-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ===== COMMUNITY OFFERS ===== */
+.offers{background:#0f1f2e;color:#fff;overflow:hidden}
+.offers .eyebrow{color:rgba(255,255,255,.6)}
+.offers .sec-title{color:#fff}
+.offers .sec-head p{color:rgba(255,255,255,.65)}
+.offer-carousel-outer{position:relative;margin:0 -28px}
+.offer-carousel-outer::before,.offer-carousel-outer::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:4;pointer-events:none}
+.offer-carousel-outer::before{left:0;background:linear-gradient(to right,#0f1f2e,transparent)}
+.offer-carousel-outer::after{right:0;background:linear-gradient(to left,#0f1f2e,transparent)}
+.offer-track{display:flex;gap:20px;padding:8px 28px 20px;width:max-content;animation:offerScroll 28s linear infinite}
+.offer-carousel-outer.paused .offer-track,.offer-carousel-outer:hover .offer-track{animation-play-state:paused}
+@keyframes offerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.offer-card{flex:0 0 300px;border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:30px 26px;background:rgba(255,255,255,.05);display:flex;flex-direction:column;gap:4px;transition:background .2s,border-color .2s}
+.offer-card:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.28)}
+.offer-badge{font-family:"Bebas Neue",sans-serif;font-size:52px;line-height:.88;color:var(--red)}
+.offer-title{font-family:"Bebas Neue",sans-serif;font-size:24px;color:#fff;line-height:1.1;margin-top:8px}
+.offer-desc{font-size:14.5px;color:rgba(255,255,255,.68);line-height:1.5;margin-top:4px}
+@media(prefers-reduced-motion:reduce){.offer-track{animation:none;flex-wrap:wrap}}
+
 @media (max-width:560px){
   .svc-grid{grid-template-columns:1fr}
   .gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
@@ -463,7 +517,7 @@ section{position:relative}
     justify-content:center;
     padding-top:80px;padding-bottom:40px;
   }
-  #heroA .hl{font-size:clamp(76px,20vw,120px)}
+  #heroA .hl{font-size:clamp(32px,8.5vw,50px)}
   .hl-static{white-space:normal}
   #heroA .sub{font-size:15px;margin-top:16px}
   #heroA .hero-cta{margin-top:22px}
@@ -577,24 +631,46 @@ section{position:relative}
   <img class="hero-photo" src="assets/photo-clipper.jpg" alt="Barber giving a precision clipper cut at Craig's Barbershop Thornton" loading="eager" />
   <div class="scrim"></div>
   <div class="container">
-    <span class="eyebrow">Barbershop · Thornton Shopping Centre</span>
-    <h1 class="hl"><span class="hl-static"><span class="red">Thornton's</span> finest</span><span class="cycle-wrap" id="heroCycleWrap"><span class="cycle-word active">cuts.</span><span class="cycle-word">fades.</span><span class="cycle-word">beards.</span><span class="cycle-word">trims.</span><span class="cycle-word">craft.</span></span></h1>
-    <p class="sub">A modern barbershop in the heart of Thornton. Precision cuts, fades and expert beard work — for every age.</p>
+    <h1 class="hl">Thornton's Most Trusted Barbershop For Over 10 Years</h1>
+    <div class="hero-trust">
+      <div class="hero-stars-lg">★★★★★</div>
+      <div class="hero-count-wrap">
+        <span class="hero-count-num" id="haircutCounter">99,864</span>
+        <span class="hero-count-lbl">Haircuts Completed</span>
+      </div>
+    </div>
+    <p class="sub">For over a decade, Craig's Barbershop has been helping the Thornton community look and feel their best. From kids' first haircuts to lifelong regulars, we've proudly served local families with quality haircuts, friendly service and convenient online booking.</p>
     <div class="hero-cta">
-      <a class="btn btn-red" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et/all-offer?venue=true" target="_blank" rel="noopener">Book Now on Fresha</a>
-      <a class="btn btn-ghost-light" href="#services">See Services</a>
+      <a class="btn btn-red" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et/all-offer?venue=true" target="_blank" rel="noopener">Book Online</a>
+      <a class="btn btn-ghost-light" href="#find">Walk In Today</a>
     </div>
   </div>
   <div class="hero-stats">
     <div class="stats-track">
       <div class="st"><span class="num"><span class="stars" data-stars-light></span>5.0</span><span class="lbl">Fresha Rating</span></div>
-      <div class="st"><span class="num" data-count="199">199</span><span class="lbl">5-Star Reviews</span></div>
-      <div class="st"><span class="num" data-count="10" data-suffix="+">10+</span><span class="lbl">Years Local</span></div>
+      <div class="st"><span class="num">200+</span><span class="lbl">Five Star Reviews</span></div>
+      <div class="st"><span class="num">10+</span><span class="lbl">Years in Thornton</span></div>
       <div class="st"><span class="num">Free</span><span class="lbl">Parking Onsite</span></div>
     </div>
   </div>
 </section>
 
+
+<!-- ============ REVIEWS ============ -->
+<section class="sec reviews" id="reviews">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div>
+        <div class="tagmark"><span class="pole"></span><span class="eyebrow">What Locals Say</span></div>
+        <h2 class="sec-title">200+ Five Star Reviews</h2>
+      </div>
+      <p>See why thousands of locals trust Craig's Barbershop.</p>
+    </div>
+  </div>
+  <div class="review-carousel-outer" id="reviewCarousel">
+    <div class="review-track" id="reviewTrack"></div>
+  </div>
+</section>
 
 <!-- ============ SERVICES ============ -->
 <section class="sec" id="services">
@@ -609,6 +685,20 @@ section{position:relative}
     <div class="svc-grid" id="svcGrid"></div>
     <div class="rail-hint" id="railHint"><span class="rail-dots" id="svcDots"></span><span>Swipe for more</span></div>
     <p class="svc-note reveal">Prices shown are starting rates and may vary with length and style. Full menu &amp; live availability on Fresha.</p>
+  </div>
+</section>
+
+<!-- ============ WHY LOCALS ============ -->
+<section class="sec why" id="why">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div>
+        <div class="tagmark"><span class="pole"></span><span class="eyebrow">Our Promise</span></div>
+        <h2 class="sec-title">Why Locals Choose Craig's</h2>
+      </div>
+      <p>Everything that makes Craig's the community's go-to barbershop, decade after decade.</p>
+    </div>
+    <div class="why-grid" id="whyGrid"></div>
   </div>
 </section>
 
@@ -627,6 +717,22 @@ section{position:relative}
       <div class="open-now" id="openNow"><span class="dot"></span><span id="openTxt">Checking hours…</span></div>
       <div><a class="btn btn-white" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et/all-offer?venue=true" target="_blank" rel="noopener">Book a Time</a></div>
     </aside>
+  </div>
+</section>
+
+<!-- ============ COMMUNITY OFFERS ============ -->
+<section class="sec offers" id="offers">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div>
+        <div class="tagmark"><span class="pole"></span><span class="eyebrow">Community</span></div>
+        <h2 class="sec-title">Community Offers &amp; Partnerships</h2>
+      </div>
+      <p>Special rates and programs for the Thornton community.</p>
+    </div>
+  </div>
+  <div class="offer-carousel-outer" id="offerCarousel">
+    <div class="offer-track" id="offerTrack"></div>
   </div>
 </section>
 
@@ -973,20 +1079,111 @@ const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 })();
 
 
-/* hero headline word cycle */
+/* ===== HAIRCUT COUNTER ===== */
+/* Edit HAIRCUT_COUNT to update the starting number */
+const HAIRCUT_COUNT = 99864;
 (function(){
-  const words=[...document.querySelectorAll('.cycle-word')];
-  if(!words.length)return;
-  let cur=0;
-  function next(){
-    const old=words[cur];
-    cur=(cur+1)%words.length;
-    old.classList.add('exiting');old.classList.remove('active');
-    words[cur].classList.add('active');
-    setTimeout(()=>old.classList.remove('exiting'),500);
+  const el=document.getElementById('haircutCounter');
+  if(!el)return;
+  let count=HAIRCUT_COUNT;
+  el.textContent=count.toLocaleString('en-AU');
+  function animateIncrement(){
+    count++;
+    el.style.transform='scale(1.1)';
+    el.style.opacity='0.6';
+    setTimeout(()=>{
+      el.textContent=count.toLocaleString('en-AU');
+      el.style.transform='scale(1)';
+      el.style.opacity='1';
+    },150);
   }
-  /* start after hero entrance animation settles */
-  setTimeout(()=>setInterval(next,2600),1900);
+  function scheduleNext(){
+    const delay=30000+Math.random()*60000;
+    setTimeout(()=>{animateIncrement();scheduleNext();},delay);
+  }
+  setTimeout(()=>{animateIncrement();scheduleNext();},4000);
+})();
+
+/* ===== REVIEWS CAROUSEL ===== */
+(function(){
+  const reviews=[
+    {name:"Sarah M.",text:"Craig's is the best barbershop in Thornton! My son has been coming since he was 4 and he's now 12. The barbers are so patient and always nail his haircut.",color:"#c05a3a"},
+    {name:"James T.",text:"Walk-ins always welcome and I've never waited too long. Great atmosphere, friendly staff and fair prices. Highly recommend to anyone in the area.",color:"#3a5ac0"},
+    {name:"Michelle K.",text:"Took my dad here for his birthday haircut. The team were so welcoming and gave him the senior discount without me even asking. Lovely local business.",color:"#3aab6a"},
+    {name:"Tom B.",text:"Been going to Craig's for 6 years. Consistent quality every single time. Best fades in the Hunter Valley, full stop.",color:"#9a3ac0"},
+    {name:"Bec A.",text:"First time using online booking and it was so easy. My son came out looking amazing. Will definitely be back — this is our new regular!",color:"#b8962a"},
+    {name:"Dave H.",text:"Great cuts at a great price. The staff are legends. Really appreciate that it's disability-friendly — important for our family.",color:"#2a8aaa"},
+    {name:"Karen L.",text:"My whole family comes here — husband, two boys and my dad. Love supporting a local Thornton business that genuinely cares about the community.",color:"#c03a6a"},
+    {name:"Liam P.",text:"The Thursday late night hours are a lifesaver. Perfect for an after-work freshen up without the weekend rush. Cheers Craig's!",color:"#6a3ac0"},
+    {name:"Natalie C.",text:"Can't recommend this place enough. My son had his very first haircut here and they made it such a special, memorable experience.",color:"#2abfaa"},
+    {name:"Mark W.",text:"Solid barbers, great vibes, fair prices. Walk-ins welcome which is perfect for our busy schedule. Always leave happy.",color:"#c07a3a"},
+    {name:"Donna F.",text:"Such a welcoming environment. The barbers are so gentle with kids — everything when you've got a nervous 5-year-old in the chair!",color:"#6ab83a"},
+    {name:"Ryan G.",text:"Best haircut I've had in years. The fade was absolutely perfect. Making this my regular spot for sure — highly recommend.",color:"#3a6ac0"},
+  ];
+  const track=document.getElementById('reviewTrack');
+  if(!track)return;
+  const all=[...reviews,...reviews];
+  track.innerHTML=all.map(r=>`
+    <div class="review-card">
+      <div class="rc-top">
+        <div class="rc-avatar" style="background:${r.color}">${r.name.split(' ').map(n=>n[0]).join('')}</div>
+        <div class="rc-info">
+          <div class="rc-name">${r.name}</div>
+          <div class="rc-stars">★★★★★</div>
+        </div>
+      </div>
+      <p class="rc-text">${r.text}</p>
+    </div>`).join('');
+  const carousel=document.getElementById('reviewCarousel');
+  carousel.addEventListener('touchstart',()=>carousel.classList.add('paused'),{passive:true});
+  carousel.addEventListener('touchend',()=>setTimeout(()=>carousel.classList.remove('paused'),1800),{passive:true});
+})();
+
+/* ===== WHY LOCALS GRID ===== */
+(function(){
+  const items=[
+    "Certified Barbers & Hairdressers",
+    "Disability Friendly",
+    "Senior Discounts Available",
+    "Kids Discounts Available",
+    "5-Star Fresha Rating",
+    "Walk-Ins Welcome",
+    "Online Booking Available",
+    "Free Parking",
+    "Family Friendly Environment",
+    "Serving Thornton For Over 10 Years",
+  ];
+  const grid=document.getElementById('whyGrid');
+  if(!grid)return;
+  grid.innerHTML=items.map((t,i)=>`
+    <div class="why-card reveal d${(i%4)+1}">
+      <span class="why-check">✓</span>
+      <span class="why-text">${t}</span>
+    </div>`).join('');
+  grid.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+
+/* ===== OFFERS CAROUSEL ===== */
+(function(){
+  const offers=[
+    {badge:"10% OFF",title:"First Online Booking",desc:"New clients receive 10% off their first online booking."},
+    {badge:"10% OFF",title:"Thornton Public School",desc:"Student Haircuts — show your student card in store."},
+    {badge:"In Store",title:"Senior Discounts",desc:"Available in store. Ask our team for details."},
+    {badge:"Welcome",title:"Disability Friendly Services",desc:"Welcoming & accessible environment for everyone."},
+    {badge:"Special Rates",title:"Local Sporting Clubs",desc:"Partnered rates available for local club members."},
+  ];
+  const track=document.getElementById('offerTrack');
+  if(!track)return;
+  const all=[...offers,...offers];
+  track.innerHTML=all.map(o=>`
+    <div class="offer-card">
+      <div class="offer-badge">${o.badge}</div>
+      <div class="offer-title">${o.title}</div>
+      <div class="offer-desc">${o.desc}</div>
+    </div>`).join('');
+  const carousel=document.getElementById('offerCarousel');
+  carousel.addEventListener('touchstart',()=>carousel.classList.add('paused'),{passive:true});
+  carousel.addEventListener('touchend',()=>setTimeout(()=>carousel.classList.remove('paused'),1800),{passive:true});
 })();
 </script>
 </body>
