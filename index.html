@@ -287,7 +287,7 @@ section{position:relative}
 /* ---------- FOOTER ---------- */
 .footer{background:var(--ink);color:#fff}
 .footer .stripe-bar{opacity:.9}
-.foot-inner{padding:74px 0 30px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px}
+.foot-inner{padding:74px 0 30px;display:grid;grid-template-columns:1.4fr 1fr;gap:48px}
 .footer .flogo img{height:30px;margin-bottom:20px}
 .footer p,.footer a{color:rgba(255,255,255,.72);font-size:15px;line-height:1.7}
 .footer a:hover{color:#fff}
@@ -317,8 +317,8 @@ section{position:relative}
 @media(prefers-reduced-motion:reduce){.word{opacity:1}.word.fire{animation:none}}
 
 /* ---------- cycling hero headline ---------- */
-.hl-static{display:block;white-space:normal}
-.cycle-wrap{display:block;position:relative;overflow:hidden}
+.hl-static{display:inline;white-space:normal}
+.cycle-wrap{display:inline-block;position:relative;overflow:hidden;vertical-align:bottom}
 .cycle-word{
   position:absolute;left:0;right:0;
   opacity:0;transform:translateY(105%);
@@ -339,6 +339,8 @@ section{position:relative}
 
 /* ---- fullscreen mobile nav ---- */
 @media (max-width:880px){
+  /* fix: sections scroll behind fixed nav bar */
+  #reviews,#services,#why,#hours,#offers,#gallery,#find{scroll-margin-top:68px}
   .nav-phone,.nav .btn-red{display:none}
   .burger{display:flex}
   .nav-inner{height:60px}
@@ -469,7 +471,7 @@ section{position:relative}
 /* ===== HERO COUNTER ===== */
 .hero-trust{display:flex;flex-direction:column;align-items:center;gap:8px;margin:20px 0 0}
 .hero-stars-lg{font-size:26px;letter-spacing:4px;color:#ffce4d;line-height:1}
-.hero-count-wrap{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;justify-content:center}
+.hero-count-wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
 .hero-count-num{font-family:"Bebas Neue",sans-serif;font-size:clamp(44px,5.5vw,70px);color:#fff;line-height:1;transition:transform .3s var(--ease),opacity .2s}
 .hero-count-lbl{font-size:14px;font-weight:700;color:rgba(255,255,255,.8);text-transform:uppercase;letter-spacing:.14em}
 @media(max-width:880px){.hero-trust{align-items:flex-start}.hero-count-wrap{justify-content:flex-start}}
@@ -853,15 +855,11 @@ section{position:relative}
       </div>
     </div>
     <div class="fcol">
-      <h4>Hours</h4>
-      <div class="row">
-        <span>Mon–Wed&nbsp;&nbsp;9:00 – 5:30</span>
-        <span>Thursday&nbsp;&nbsp;9:00 – 7:00</span>
-        <span>Friday&nbsp;&nbsp;9:00 – 5:30</span>
-        <span>Saturday&nbsp;&nbsp;9:00 – 1:00</span>
-        <span>Sunday&nbsp;&nbsp;Closed</span>
+      <h4>Book</h4>
+      <div class="row" style="margin-bottom:16px">
+        <span style="color:rgba(255,255,255,.72);font-size:15px">Walk-ins welcome · Online booking via Fresha</span>
       </div>
-      <a class="btn btn-red" style="margin-top:20px" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et/all-offer?venue=true" target="_blank" rel="noopener">Book on Fresha</a>
+      <a class="btn btn-red" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et/all-offer?venue=true" target="_blank" rel="noopener">Book on Fresha</a>
     </div>
   </div>
   <div class="container foot-bottom">
