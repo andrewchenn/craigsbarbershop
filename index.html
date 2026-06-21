@@ -317,7 +317,7 @@ section{position:relative}
 @media(prefers-reduced-motion:reduce){.word{opacity:1}.word.fire{animation:none}}
 
 /* ---------- cycling hero headline ---------- */
-.hl-static{display:block;white-space:nowrap}
+.hl-static{display:block;white-space:normal}
 .cycle-wrap{display:block;position:relative;overflow:hidden}
 .cycle-word{
   position:absolute;left:0;right:0;
@@ -391,11 +391,22 @@ section{position:relative}
   .mob-drawer.open .mob-drawer-nav a:nth-child(6){animation-delay:.36s}
   .mob-drawer.open .mob-drawer-nav a:nth-child(7){animation-delay:.42s}
   /* review carousel — swipeable rail on mobile (same pattern as services) */
-  .review-carousel-outer{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -18px}
+  .review-carousel-outer{overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 10%;scrollbar-width:none;margin:0 -18px}
   .review-carousel-outer::-webkit-scrollbar{display:none}
   .review-carousel-outer::before,.review-carousel-outer::after{display:none}
-  .review-track{animation:none !important;padding:4px 18px 16px 28px;scroll-padding-left:28px}
-  .review-card{scroll-snap-align:start;flex:0 0 82%;max-width:300px}
+  .review-track{animation:none !important;padding:4px 18px 16px 28px}
+  .review-card{scroll-snap-align:center;flex:0 0 82%;max-width:300px}
+  /* offers carousel — swipeable rail on mobile */
+  .offer-carousel-outer{overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 10%;scrollbar-width:none;margin:0 -18px}
+  .offer-carousel-outer::-webkit-scrollbar{display:none}
+  .offer-carousel-outer::before,.offer-carousel-outer::after{display:none}
+  .offer-track{animation:none !important;padding:4px 18px 20px 28px}
+  .offer-card{scroll-snap-align:center;flex:0 0 82%;max-width:300px}
+  /* why: show more button on mobile */
+  .why-more{display:flex}
+  /* compact why section on mobile */
+  section.why{padding:60px 0}
+  .why-grid{margin-top:28px;gap:10px}
   .mob-drawer-foot{display:flex;flex-direction:column;gap:12px;padding-top:18px;flex-shrink:0}
   .mob-drawer-call{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:600;color:rgba(255,255,255,.78);font-size:15px;text-decoration:none}
   .mob-drawer-call svg{width:16px;height:16px}
@@ -441,9 +452,7 @@ section{position:relative}
   }
   .mobile-book.show{transform:translateY(0)}
   /* layout */
-  .hours-wrap,.about-grid,.find-grid{grid-template-columns:1fr;gap:40px}
-  .about-media{overflow:visible}
-  .about-media .badge{right:18px;bottom:18px}
+  .hours-wrap,.find-grid{grid-template-columns:1fr;gap:40px}
   .sec{padding:72px 0}
   .sec-head{margin-bottom:40px}
   .cta-inner{padding:72px 0}
@@ -458,7 +467,7 @@ section{position:relative}
 }
 
 /* ===== HERO COUNTER ===== */
-.hero-trust{display:flex;flex-direction:column;align-items:center;gap:8px;margin:20px auto 0}
+.hero-trust{display:flex;flex-direction:column;align-items:center;gap:8px;margin:20px 0 0}
 .hero-stars-lg{font-size:26px;letter-spacing:4px;color:#ffce4d;line-height:1}
 .hero-count-wrap{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;justify-content:center}
 .hero-count-num{font-family:"Bebas Neue",sans-serif;font-size:clamp(44px,5.5vw,70px);color:#fff;line-height:1;transition:transform .3s var(--ease),opacity .2s}
@@ -486,11 +495,14 @@ section{position:relative}
 
 /* ===== WHY LOCALS ===== */
 .why{background:var(--surface)}
-.why-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:48px}
-.why-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 16px;display:flex;align-items:flex-start;gap:12px;transition:transform .22s var(--ease),box-shadow .22s,border-color .22s}
+.why-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:40px}
+.why-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 14px;display:flex;align-items:flex-start;gap:10px;transition:transform .22s var(--ease),box-shadow .22s,border-color .22s}
 .why-card:hover{transform:translateY(-4px);box-shadow:0 20px 46px -22px rgba(0,0,0,.28);border-color:transparent}
-.why-check{width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;flex:none;font-size:13px;font-weight:700;margin-top:1px}
-.why-text{font-weight:600;font-size:14.5px;line-height:1.4;color:var(--ink)}
+.why-check{width:24px;height:24px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;flex:none;font-size:12px;font-weight:700;margin-top:1px}
+.why-text{font-weight:600;font-size:14px;line-height:1.4;color:var(--ink)}
+.why-hidden{display:none}
+.why-more{display:none;margin:20px auto 0}
+@media(min-width:881px){.why-hidden{display:flex !important}}
 @media(max-width:1080px){.why-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:700px){.why-grid{grid-template-columns:repeat(2,1fr)}}
 
@@ -526,12 +538,11 @@ section{position:relative}
     padding-top:80px;padding-bottom:40px;
   }
   #heroA .hl{font-size:clamp(46px,12vw,62px)}
-  .hero-trust{flex-direction:row;align-items:center;gap:14px;margin-top:14px}
+  .hero-trust{flex-direction:row;align-items:center;gap:14px;margin-top:14px;margin-left:0}
   .hero-count-wrap{flex-wrap:nowrap;gap:6px}
-  .hero-stars-lg{font-size:16px;letter-spacing:2px}
-  .hero-count-num{font-size:clamp(24px,6.5vw,32px)}
-  .hero-count-lbl{font-size:10.5px;letter-spacing:.08em}
-  .hl-static{white-space:normal}
+  .hero-stars-lg{font-size:20px;letter-spacing:3px}
+  .hero-count-num{font-size:clamp(28px,7.5vw,36px)}
+  .hero-count-lbl{font-size:12px;letter-spacing:.1em}
   #heroA .sub{font-size:15px;margin-top:16px}
   #heroA .hero-cta{margin-top:22px}
   #heroA .hero-cta .btn{min-height:48px;padding:0 20px;font-size:15px}
@@ -573,9 +584,8 @@ section{position:relative}
   .svc p{font-size:14px;margin-top:8px}
   .svc .book{margin-top:12px;font-size:14px}
   .svc .dur{font-size:11.5px}
-  /* about */
-  .about-media .badge{right:12px;bottom:12px;padding:14px 18px}
-  .about-media .badge .num{font-size:44px}
+  /* gallery — hide last item on mobile */
+  #galGrid .gal-item:last-child{display:none}
   /* find us — compact */
   #find .sec-head{display:none}
   #find .find-grid{gap:20px}
@@ -603,7 +613,7 @@ section{position:relative}
       <a class="lnk" href="#reviews">Reviews</a>
       <a class="lnk" href="#services">Services</a>
       <a class="lnk" href="#hours">Hours</a>
-      <a class="lnk" href="#about">About</a>
+      <a class="lnk" href="#gallery">Gallery</a>
       <a class="lnk" href="#find">Find Us</a>
     </nav>
     <div class="nav-cta">
@@ -629,7 +639,7 @@ section{position:relative}
     <a href="#services"><span>Services</span><span class="n">02</span></a>
     <a href="#hours"><span>Hours</span><span class="n">03</span></a>
     <a href="#offers"><span>Offers</span><span class="n">04</span></a>
-    <a href="#about"><span>About</span><span class="n">05</span></a>
+    <a href="#gallery"><span>Gallery</span><span class="n">05</span></a>
     <a href="#find"><span>Find Us</span><span class="n">06</span></a>
   </nav>
   <div class="mob-drawer-foot">
@@ -645,7 +655,7 @@ section{position:relative}
   <img class="hero-photo" src="assets/photo-clipper.jpg" alt="Barber giving a precision clipper cut at Craig's Barbershop Thornton" loading="eager" />
   <div class="scrim"></div>
   <div class="container">
-    <h1 class="hl">Thornton's Most Trusted Barbershop For Over 10 Years</h1>
+    <h1 class="hl"><span class="hl-static">Thornton's Most Trusted Barbershop For</span><span class="cycle-wrap" id="heroCycleWrap"><span class="cycle-word active">Over 10 Years.</span><span class="cycle-word">The Community.</span><span class="cycle-word">Every Family.</span><span class="cycle-word">A Decade.</span><span class="cycle-word">Thornton.</span></span></h1>
     <div class="hero-trust">
       <div class="hero-stars-lg">★★★★★</div>
       <div class="hero-count-wrap">
@@ -653,7 +663,7 @@ section{position:relative}
         <span class="hero-count-lbl">Haircuts Completed</span>
       </div>
     </div>
-    <p class="sub">For over a decade, Craig's Barbershop has been helping the Thornton community look and feel their best. From kids' first haircuts to lifelong regulars, we've proudly served local families with quality haircuts, friendly service and convenient online booking.</p>
+    <p class="sub">For over a decade, Craig's Barbershop has been helping the Thornton community look and feel their best.</p>
     <div class="hero-cta">
       <a class="btn btn-red" href="https://www.fresha.com/a/craigs-barbershop-thornton-1a-taylor-avenue-wiubl9et/all-offer?venue=true" target="_blank" rel="noopener">Book Online</a>
       <a class="btn btn-ghost-light" href="#find">Walk In Today</a>
@@ -747,32 +757,6 @@ section{position:relative}
   </div>
   <div class="offer-carousel-outer" id="offerCarousel">
     <div class="offer-track" id="offerTrack"></div>
-  </div>
-</section>
-
-<!-- ============ ABOUT ============ -->
-<section class="sec" id="about">
-  <div class="container about-grid">
-    <div class="about-media reveal">
-      <div class="frame"><img src="assets/photo-styling.jpg" alt="A barber styling a client at Craig's Barbershop" /></div>
-      <div class="badge">
-        <div class="num">5.0</div>
-        <div class="stars gold" data-stars style="justify-content:center"></div>
-        <div class="lbl">199 Reviews</div>
-      </div>
-    </div>
-    <div class="about-copy reveal d1">
-      <div class="tagmark"><span class="pole"></span><span class="eyebrow">About the Shop</span></div>
-      <h2>Grooming, done<br />properly.</h2>
-      <p class="lead">At Craig's Barbershop, grooming transcends the ordinary. With a focus on precision haircuts and expertly styled beards, every visit promises a refined experience tailored to your style.</p>
-      <p>Convenient parking ensures that stepping into this welcoming space is as hassle-free as the service is exceptional. We've looked after Thornton for over a decade — family-friendly, fully accessible, and now under new ownership carrying the same standard forward.</p>
-      <div class="feat-row">
-        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Family friendly</span>
-        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Wheelchair accessible</span>
-        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> EFTPOS available</span>
-        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Free parking</span>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1170,11 +1154,34 @@ const HAIRCUT_COUNT = 99864;
   const grid=document.getElementById('whyGrid');
   if(!grid)return;
   grid.innerHTML=items.map((t,i)=>`
-    <div class="why-card reveal d${(i%4)+1}">
+    <div class="why-card reveal d${(i%4)+1}${i>=6?' why-hidden':''}">
       <span class="why-check">✓</span>
       <span class="why-text">${t}</span>
     </div>`).join('');
   grid.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const btn=document.createElement('button');
+  btn.className='btn btn-ghost why-more';
+  btn.textContent='Show all features';
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.why-hidden').forEach(el=>el.classList.remove('why-hidden'));
+    btn.style.display='none';
+  });
+  grid.insertAdjacentElement('afterend',btn);
+})();
+
+/* ===== HERO HEADLINE CYCLE ===== */
+(function(){
+  const words=[...document.querySelectorAll('.cycle-word')];
+  if(!words.length)return;
+  let cur=0;
+  function next(){
+    const old=words[cur];
+    cur=(cur+1)%words.length;
+    old.classList.add('exiting');old.classList.remove('active');
+    words[cur].classList.add('active');
+    setTimeout(()=>old.classList.remove('exiting'),500);
+  }
+  setTimeout(()=>setInterval(next,2600),1900);
 })();
 
 /* ===== OFFERS CAROUSEL ===== */
