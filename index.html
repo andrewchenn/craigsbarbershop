@@ -393,16 +393,16 @@ section{position:relative}
   .mob-drawer.open .mob-drawer-nav a:nth-child(6){animation-delay:.36s}
   .mob-drawer.open .mob-drawer-nav a:nth-child(7){animation-delay:.42s}
   /* review carousel — swipeable rail on mobile (same pattern as services) */
-  .review-carousel-outer{overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 10%;scrollbar-width:none;margin:0 -18px}
+  .review-carousel-outer{overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0;scrollbar-width:none;margin:0 -18px}
   .review-carousel-outer::-webkit-scrollbar{display:none}
   .review-carousel-outer::before,.review-carousel-outer::after{display:none}
-  .review-track{animation:none !important;padding:4px 18px 16px 28px}
+  .review-track{animation:none !important;padding:4px 9vw 16px 9vw}
   .review-card{scroll-snap-align:center;flex:0 0 82%;max-width:300px}
   /* offers carousel — swipeable rail on mobile */
-  .offer-carousel-outer{overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 10%;scrollbar-width:none;margin:0 -18px}
+  .offer-carousel-outer{overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0;scrollbar-width:none;margin:0 -18px}
   .offer-carousel-outer::-webkit-scrollbar{display:none}
   .offer-carousel-outer::before,.offer-carousel-outer::after{display:none}
-  .offer-track{animation:none !important;padding:4px 18px 20px 28px}
+  .offer-track{animation:none !important;padding:4px 9vw 20px 9vw}
   .offer-card{scroll-snap-align:center;flex:0 0 82%;max-width:300px}
   /* why: show more button on mobile */
   .why-more{display:flex}
@@ -541,7 +541,7 @@ section{position:relative}
   }
   #heroA .hl{font-size:clamp(46px,12vw,62px)}
   .hero-trust{flex-direction:row;align-items:center;gap:14px;margin-top:14px;margin-left:0}
-  .hero-count-wrap{flex-wrap:nowrap;gap:6px}
+  .hero-count-wrap{flex-wrap:nowrap;gap:10px}
   .hero-stars-lg{font-size:20px;letter-spacing:3px}
   .hero-count-num{font-size:clamp(28px,7.5vw,36px)}
   .hero-count-lbl{font-size:12px;letter-spacing:.1em}
@@ -657,7 +657,7 @@ section{position:relative}
   <img class="hero-photo" src="assets/photo-clipper.jpg" alt="Barber giving a precision clipper cut at Craig's Barbershop Thornton" loading="eager" />
   <div class="scrim"></div>
   <div class="container">
-    <h1 class="hl"><span class="hl-static">Thornton's Most Trusted Barbershop For</span><span class="cycle-wrap" id="heroCycleWrap"><span class="cycle-word active">Over 10 Years.</span><span class="cycle-word">The Community.</span><span class="cycle-word">Every Family.</span><span class="cycle-word">A Decade.</span><span class="cycle-word">Thornton.</span></span></h1>
+    <h1 class="hl"><span class="hl-static">Thornton's Most Trusted Barbershop For </span><span class="cycle-wrap" id="heroCycleWrap"><span class="cycle-word active">Over 10 Years.</span><span class="cycle-word">The Community.</span><span class="cycle-word">Every Family.</span><span class="cycle-word">A Decade.</span><span class="cycle-word">Thornton.</span></span></h1>
     <div class="hero-trust">
       <div class="hero-stars-lg">★★★★★</div>
       <div class="hero-count-wrap">
@@ -855,7 +855,6 @@ section{position:relative}
       </div>
     </div>
     <div class="fcol">
-      <h4>Book</h4>
       <div class="row" style="margin-bottom:16px">
         <span style="color:rgba(255,255,255,.72);font-size:15px">Walk-ins welcome · Online booking via Fresha</span>
       </div>
